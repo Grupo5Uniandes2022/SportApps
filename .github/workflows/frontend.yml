@@ -1,0 +1,42 @@
+name: CI Front-End
+
+on: # ¿Cuando ejecutar?
+  push:
+    paths:
+      - 'frontend/**'
+    branches: 
+      - master
+      - 'releases/**'
+      - develop
+  pull_request:
+    paths:
+      - 'frontend/**'
+    branches: 
+      - master
+      - develop
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Cache node modules
+        id: node-cache # Id del cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true' 
+        run: npm install
+      - name: Run Build command
+        run: npm run build -- --prod
+      - name: Run Unit tests
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
