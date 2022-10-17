@@ -5,15 +5,12 @@ on: # ¿Cuando ejecutar?
     paths:
       - 'frontend/**'
     branches: 
-      - master
-      - 'releases/**'
-      - develop
+      - main
   pull_request:
     paths:
       - 'frontend/**'
     branches: 
-      - master
-      - develop
+      - main
 
 jobs:
   ci:
