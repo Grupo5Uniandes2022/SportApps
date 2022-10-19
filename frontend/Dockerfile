@@ -1,7 +1,5 @@
-FROM nginx
-
-# COPY nginx.conf /etc/nginx/nginx.conf
+FROM nginx:1.15
+#Copy ci-dashboard-dist
+COPY ./dist/frontend /usr/share/nginx/html
+#Copy default nginx configuration
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-
-COPY . /usr/share/nginx/html
