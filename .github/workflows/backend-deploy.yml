@@ -1,9 +1,9 @@
-name: CD Front-End
+name: CD Back-End
 
 on: # ¿Cuando ejecutar?
   push:
     paths:
-      - 'frontend/**'
+      - 'backend/**'
     branches: 
       - main
 env:
@@ -11,16 +11,16 @@ env:
   GAR_LOCATION: ${{ secrets.GET_GKE_CRED_CLUSTER_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
-  DEPLOYMENT_NAME: angular-front
+  DEPLOYMENT_NAME: nest-back
   REPOSITORY: users-sportsapp
-  IMAGE: angular-app
+  IMAGE: nest-app
 jobs:
   deploy:
     name: Continuous Deployment
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./backend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -38,7 +38,7 @@ jobs:
       - name: Run Build command
         run: npm run build -- --prod
       - name: Run Unit tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        run: npm run test
       # Alternative option - authentication via credentials json
       - id: 'auth'
         uses: 'google-github-actions/auth@v0'
@@ -62,7 +62,7 @@ jobs:
 
       # Build the Docker image
       - name: Build
-        working-directory: ./frontend
+        working-directory: ./backend
         run: |-
           docker build \
             --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
@@ -77,14 +77,14 @@ jobs:
 
       # Set up kustomize
       - name: Set up Kustomize
-        working-directory: ./frontend/gke/
+        working-directory: ./backend/gke/
         run: |-
           curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
           chmod u+x ./kustomize
 
       # Deploy the Docker image to the GKE cluster
       - name: Deploy
-        working-directory: ./frontend/gke/
+        working-directory: ./backend/gke/
         run: |-
           # replacing the image name in the k8s template
           ./kustomize edit set image LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG=$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
