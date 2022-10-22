@@ -1,12 +1,7 @@
-name: CI/CD Front-End
+name: CD Front-End
 
 on: # ¿Cuando ejecutar?
   push:
-    paths:
-      - 'frontend/**'
-    branches: 
-      - main
-  pull_request:
     paths:
       - 'frontend/**'
     branches: 
@@ -20,8 +15,8 @@ env:
   REPOSITORY: group5-registry
   IMAGE: angular-app
 jobs:
-  ci:
-    name: Continuous Integration
+  deploy:
+    name: Continuous Deployment
     runs-on: ubuntu-latest
     defaults:
       run:
