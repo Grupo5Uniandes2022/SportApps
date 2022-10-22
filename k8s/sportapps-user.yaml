@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users
+  namespace: sportapps-ns
+  labels:
+    app: users
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: users
+  template:
+    metadata:
+      labels:
+        app: users
+    spec:
+      containers:
+        - name: user
+          image: us-central1-docker.pkg.dev/sportsapp-365801/users-sportsapp/user-image:1.0
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: service-secrets
+            mountPath: "/etc/secrets"
+            readOnly: true
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+            requests:
+              cpu: 500m
+              memory: 0.7Gi
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: host
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: port
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: name
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: user-config
+                  key: username                                                      
+
+      volumes:
+        - name: service-secrets
+          secret:
+            secretName: users-secret
