@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate} from 'typeorm';
+import { Pay } from '../../pay/entities/pay.entity';
+import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToOne} from 'typeorm';
 
 
 @Entity('users')
@@ -31,15 +32,8 @@ export class User {
   })
   roles: string[];
 
-  @BeforeInsert()
-  checkFieldsBeforeInsert(){
-    this.email = this.email.toLowerCase().trim();
-  }
-
-  @BeforeUpdate()
-  checkFieldsBeforeUpdate(){
-    this.email = this.email.toLowerCase().trim();
-  }
+  @ManyToOne(()=> Pay, (pay) => pay.users)
+  pay: Pay
 
 
 }

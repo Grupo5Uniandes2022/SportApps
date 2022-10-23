@@ -1,18 +1,24 @@
-name: CI Front-End
+name: CI Back-End
 
 on: # ¿Cuando ejecutar?
-  pull_request:
+  push:
     paths:
-      - 'frontend/**'
+      - 'backend/**'
     branches: 
       - main
+  pull_request:
+    paths:
+      - 'backend/**'
+    branches: 
+      - main
+
 jobs:
   ci:
     name: Continuous Integration
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./frontend
+        working-directory: ./backend
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -28,6 +34,6 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true' 
         run: npm install
       - name: Run Build command
-        run: npm run build -- --prod
+        run: npm run build
       - name: Run Unit tests
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
+        run: npm run test
