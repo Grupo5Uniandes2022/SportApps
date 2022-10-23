@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate} from 'typeorm';
+import { Pay } from '../../pay/entities/pay.entity';
+import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToOne} from 'typeorm';
 
 
 @Entity('users')
@@ -30,5 +31,9 @@ export class User {
     default: ['user']
   })
   roles: string[];
+
+  @ManyToOne(()=> Pay, (pay) => pay.users)
+  pay: Pay
+
 
 }

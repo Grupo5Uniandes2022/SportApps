@@ -40,7 +40,7 @@ describe('should validate jwt strategy', () => {
   it('should validate', () => {
     jest.spyOn(configService,'get').mockReturnValue('testjwt');
     jest.spyOn(userRepository,'findOneBy').mockResolvedValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: []
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []}
     });
     let strategy: JwtStrategy = new JwtStrategy(userRepository, configService);
     expect(strategy).toBeDefined();
@@ -50,7 +50,7 @@ describe('should validate jwt strategy', () => {
   it('should handle no active', async () => {
     jest.spyOn(configService,'get').mockReturnValue('testjwt');
     jest.spyOn(userRepository,'findOneBy').mockResolvedValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: false, roles: []
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: false, roles: [],  pay: {id:'test', title:'test plan',features: ["te1"], users: []}
     });
     let strategy: JwtStrategy = new JwtStrategy(userRepository, configService);
     expect(strategy).toBeDefined();
