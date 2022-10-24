@@ -1,16 +1,35 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppComponent } from './app.component';
+import { AuthModule } from '@app/auth/auth.module';
+import { HealthModule } from '@app/health/health.module';
+
+import { AppComponent } from '@app/root/container/app.component';
+import { HeaderComponent } from '@app/root/components/header/header.component';
+import { NavbarComponent } from '@app/root/components/navbar/navbar.component';
+
+import { Store } from '@app/store';
+
+import { AppRoutingModule } from '@app/app-routing.module';
+import { WebComponent } from './web/web.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    NavbarComponent,
+    WebComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    HealthModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    Store
+  ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
