@@ -12,8 +12,8 @@ env:
   GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
   DEPLOYMENT_NAME: angular-front
-  REPOSITORY: users-sportsapp
-  IMAGE: angular-app
+  REPOSITORY: front-sportsapp
+  IMAGE: front
 jobs:
   deploy:
     name: Continuous Deployment
