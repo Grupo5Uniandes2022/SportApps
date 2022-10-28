@@ -1,0 +1,39 @@
+name: CI Back-End
+
+on: # ¿Cuando ejecutar?
+  push:
+    paths:
+      - 'backend/**'
+    branches: 
+      - main
+  pull_request:
+    paths:
+      - 'backend/**'
+    branches: 
+      - main
+
+jobs:
+  ci:
+    name: Continuous Integration
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Cache node modules
+        id: node-cache # Id del cache
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true' 
+        run: npm install
+      - name: Run Build command
+        run: npm run build
+      - name: Run Unit tests
+        run: npm run test

@@ -28,38 +28,4 @@ export class AuthController {
   ){
     return this.authService.checkAuthStatus(user)
   }
-
-/* 
-  @Get('private')
-  @UseGuards(AuthGuard())
-  testingPrivateRoute(
-    @GetUser('email') user: User,
-    @RawHeaders() rawHeaders: string[]
-  ){
-    return {
-      ok: true,
-      msg:'private route',
-      user,
-      rawHeaders 
-    }
-  }
-
-
-  @Get('private2')
-  @RoleProtected(ValidRoles.superUser)
-  @UseGuards(AuthGuard(), UserRoleGuard)
-  privateRoute2(
-    @GetUser() user: User
-  ){
-    return {
-      ok: true,
-      user
-    }
-  }
-
-  @Get('private3')
-  @Auth(ValidRoles.superUser)
-  privateRoute3(){
-    return {ok:true}
-  } */
 }

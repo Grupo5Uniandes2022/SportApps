@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { PayModule } from './pay/pay.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { AuthModule } from './auth/auth.module';
       autoLoadEntities: true,
       synchronize: true //No Usar en prod, en prod hay migraciones
     }),
-    AuthModule
+    AuthModule,
+    PayModule
   ],
   controllers: [],
   providers: [],

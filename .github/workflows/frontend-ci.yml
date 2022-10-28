@@ -1,20 +1,11 @@
 name: CI Front-End
 
 on: # ¿Cuando ejecutar?
-  push:
-    paths:
-      - 'frontend/**'
-    branches: 
-      - master
-      - 'releases/**'
-      - develop
   pull_request:
     paths:
       - 'frontend/**'
     branches: 
-      - master
-      - develop
-
+      - main
 jobs:
   ci:
     name: Continuous Integration
@@ -26,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 10
       - name: Cache node modules
         id: node-cache # Id del cache
         uses: actions/cache@v1
