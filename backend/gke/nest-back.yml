@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nest-back
+  labels:
+    app: nest-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: nest-back
+  template:
+    metadata:
+      labels:
+        app: nest-back
+    spec:
+      containers:
+        - name: nest-back
+          image: LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE:TAG
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nest-back
+  name: nest-back
+spec:
+  type: LoadBalancer
+  ports:
+    - name: nest-back
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: nest-back
