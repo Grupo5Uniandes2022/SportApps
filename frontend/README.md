@@ -5,7 +5,7 @@ A simple web application for fitness activities
 
 ## Development server
 
-Run `npm install  &&  npm start ` for a dev server. Navigate to `http://localhost:4200/`. The app will automaticall reload if you change any of the source files.
+Run `npm install  &&  npm start ` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
