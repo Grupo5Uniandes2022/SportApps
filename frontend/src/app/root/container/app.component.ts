@@ -13,7 +13,7 @@ import { Store } from '@app/store';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'sport-apps';
+  title = 'frontend';
   user$: Observable<User>;
   subscription: Subscription;
 
