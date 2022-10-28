@@ -1,0 +1,23 @@
+<div class="plans">
+  <div class="plans__title">
+    <h1>
+      <img src="/assets/images/plan.svg">
+      <span id="title_plan">Plan de Subscripción</span>
+    </h1>
+
+    <a class="btn btn-primary" [routerLink]="['../profile/update-plan']" role="button">Cambiar mi plan de subscripción</a>
+
+
+  </div>
+
+  <div class="message">
+    Tu plan de subscripción actual es :  <span>Gratis</span>
+  </div>
+
+  <ng-template #loading>
+    <div class="message">
+      <img src="/assets/images/loading.svg">
+      Obteniendo planes...
+    </div>
+  </ng-template>
+</div>
