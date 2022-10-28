@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: ServiceAccount
-
 metadata:
   name: sportapps-service-account
   namespace: sportapps-ns
   annotations:
-    pending
+    iam.gke.io/gcp-service-account: sportsappserviceaccount@sportsapp-365801.iam.gserviceaccount.com
 ---
 
 kind: Role

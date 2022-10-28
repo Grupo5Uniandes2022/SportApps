@@ -1,29 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: users
+  name: users-deployment
   namespace: sportapps-ns
   labels:
-    app: users
-
+    app: user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: users
+      app: user
   template:
     metadata:
       labels:
-        app: users
+        app: user
     spec:
+      serviceAccountName: sportapps-service-account
+      automountServiceAccountToken: true    
       containers:
         - name: user
           image: us-central1-docker.pkg.dev/sportsapp-365801/users-sportsapp/user-image:1.0
           imagePullPolicy: Always
-          volumeMounts:
-          - name: service-secrets
-            mountPath: "/etc/secrets"
-            readOnly: true
           ports:
             - containerPort: 3000
           resources:
@@ -53,9 +50,21 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: user-config
-                  key: username                                                      
-
-      volumes:
-        - name: service-secrets
-          secret:
-            secretName: users-secret
+                  key: username     
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: users-secret
+                  key: db_password
+                  optional: false
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: users-secret
+                  key: jwt_secret
+                  optional: false
+      tolerations:
+      - key: instance_type
+        value: spot
+        effect: NoSchedule
+        operator: Equal

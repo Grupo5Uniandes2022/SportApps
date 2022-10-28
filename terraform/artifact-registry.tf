@@ -4,4 +4,5 @@ resource "google_artifact_registry_repository" "users-sportsapp" {
   repository_id = "users-sportsapp"
   description   = "Container with User BackEnd microservice"
   format        = "DOCKER"
+  project       = "sportsapp-365801"
 }
