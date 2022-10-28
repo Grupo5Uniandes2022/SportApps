@@ -6,3 +6,11 @@ resource "google_artifact_registry_repository" "users-sportsapp" {
   format        = "DOCKER"
   project       = "sportsapp-365801"
 }
+
+resource "google_artifact_registry_repository" "front-sportsapp" {
+  location      = "us-central1"
+  repository_id = "front-sportsapp"
+  description   = "Container with FrontEnd"
+  format        = "DOCKER"
+  project       = "sportsapp-365801"
+}
