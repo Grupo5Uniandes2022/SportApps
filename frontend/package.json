@@ -1,5 +1,5 @@
 {
-  "name": "sport-apps",
+  "name": "frontend",
   "version": "0.0.0",
   "scripts": {
     "build": "ng build --prod=true",
