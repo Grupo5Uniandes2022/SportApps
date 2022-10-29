@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { PayModule } from './pay/pay.module';
+import { UserLimitationsModule } from './user-limitations/user-limitations.module';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -18,7 +20,9 @@ import { PayModule } from './pay/pay.module';
       synchronize: true //No Usar en prod, en prod hay migraciones
     }),
     AuthModule,
-    PayModule
+    PayModule,
+    UserLimitationsModule,
+    EventsModule
   ],
   controllers: [],
   providers: [],

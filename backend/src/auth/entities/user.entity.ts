@@ -1,5 +1,7 @@
 import { Pay } from '../../pay/entities/pay.entity';
-import {Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, OneToMany, ManyToOne} from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn, OneToMany} from 'typeorm';
+import { UserLimitation } from '../../user-limitations/entities/user-limitation.entity';
+import { Event } from '../../events/entities/event.entity';
 
 
 @Entity('users')
@@ -33,7 +35,12 @@ export class User {
   roles: string[];
 
   @ManyToOne(()=> Pay, (pay) => pay.users)
-  pay: Pay
+  pay: Pay;
 
+  @OneToOne(() => UserLimitation)
+  @JoinColumn()
+  userLimitation: UserLimitation;
 
+  @OneToMany(() => Event, (event)=> event.user)
+  events: Event[]  
 }
