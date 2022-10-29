@@ -11,7 +11,7 @@ export class CreateEventDto {
   @IsString()
   title: string;
 
-  @IsIn(['training','group','appointment'])
+  @IsIn(['training','group','appointment','free'])
   type: string;
 
 }

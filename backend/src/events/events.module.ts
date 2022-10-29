@@ -11,6 +11,7 @@ import { Event } from './entities/event.entity';
     AuthModule
   ],
   controllers: [EventsController],
-  providers: [EventsService]
+  providers: [EventsService],
+  exports: [EventsService]
 })
 export class EventsModule {}

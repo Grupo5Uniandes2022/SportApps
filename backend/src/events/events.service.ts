@@ -35,10 +35,27 @@ export class EventsService {
     const doctor = await this.userRepository.findOneBy({id: idDoctor});
     if(doctor){
       newEvent.user = doctor;
-      this.eventRepository.save(newEvent);
+      await this.eventRepository.save(newEvent);
+      const newUserEvent = await this.eventRepository.create({...createEventDto,user,title: `Appointment ${doctor.fullName}` })
+      await this.eventRepository.save(newUserEvent);
       return {ok: true}
     }    
     return {ok: false}
+   }
+
+   async addEvents(user: User, eventNumber: number){
+    const states= ['appointment','free']; 
+    for(let i = 0; i < eventNumber ; i++){
+      const createDto = new CreateEventDto()
+      createDto.endDate = new Date();
+      createDto.endDate.setDate(createDto.endDate.getDay() + i);
+      createDto.startDate = new Date();
+      createDto.startDate.setDate(createDto.startDate.getDay() + i);
+      createDto.type = states[Math.floor(Math.random() * 2)];
+      createDto.title = createDto.type;
+      await this.create(user, createDto );
+    }
+
    }
  
 }
