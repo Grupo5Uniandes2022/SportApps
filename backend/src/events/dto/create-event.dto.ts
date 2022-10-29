@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsString } from "class-validator";
+import { IsDate, IsDateString, IsIn, IsString } from "class-validator";
 
 export class CreateEventDto {
 
@@ -10,5 +10,8 @@ export class CreateEventDto {
   
   @IsString()
   title: string;
+
+  @IsIn(['training','group','appointment'])
+  type: string;
 
 }

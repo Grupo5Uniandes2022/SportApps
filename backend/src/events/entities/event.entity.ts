@@ -16,6 +16,9 @@ export class Event {
   @Column()
   title: string;
 
+  @Column()
+  type: string;
+
   @ManyToOne(() => User, (user) => user.events)
   user: User;
 
