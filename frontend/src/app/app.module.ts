@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AuthModule } from '@app/auth/auth.module';
 import { HealthModule } from '@app/health/health.module';
@@ -12,6 +12,8 @@ import { Store } from '@app/store';
 
 import { AppRoutingModule } from '@app/app-routing.module';
 import { WebComponent } from './web/web.component';
+import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from '../app/interceptors/index';
 
 
 @NgModule({
@@ -25,11 +27,14 @@ import { WebComponent } from './web/web.component';
     BrowserModule,
     AppRoutingModule,
     AuthModule,
-    HealthModule
+    HealthModule,
+    HttpClientModule,
   ],
   providers: [
-    Store
+    Store,
+    httpInterceptorProviders
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

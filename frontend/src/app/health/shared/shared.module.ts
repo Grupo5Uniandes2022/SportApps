@@ -12,6 +12,7 @@ import { WorkoutPipe } from '@app/health/shared/pipes/workout.pipe';
 import { MealsService } from '@app/health/shared/services/meals.service';
 import { WorkoutsService } from '@app/health/shared/services/workouts.service';
 import { ScheduleService } from '@app/health/shared/services/schedule.service';
+import { StravaService } from '@app/health/shared/services/strava.service';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ export class SharedModule {
       providers: [
         MealsService,
         WorkoutsService,
-        ScheduleService
+        ScheduleService,
+        StravaService,
       ]
     };
   }

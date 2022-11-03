@@ -1,0 +1,20 @@
+<section class="section">
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-third">
+        <div *ngIf="data$ | async as data">
+          <app-integrations-detail [data]="data"></app-integrations-detail>
+        </div>
+      </div>
+      <!--div class="column is-two-thirds">
+        <div *ngIf="activities$ | async as activities">
+          <div *ngFor="let activity of activities">
+            <app-integrations [activity]="activity"></app-integrations>
+            <hr />
+          </div>
+        </div>
+      </div-->
+    </div>
+  </div>
+</section>
