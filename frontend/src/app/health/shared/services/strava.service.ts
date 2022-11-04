@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Activity, ActivityStats } from '../../../models/activity.model';
 import { environment } from 'src/environments/environment';
+import { Token } from '../../../models/token.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class StravaService {
     return this.http.request(method, url).pipe(
       catchError(this.handleError)
     )
+  }
+
+  public authenticateAthlete(code: string): Observable<Token> {
+    let url = `${environment.stravaOAuth.tokenEndpoint}?client_id=${environment.stravaOAuth.clientId}&client_secret=${environment.stravaOAuth.dummyClientSecret}&code=${code}&grant_type=${environment.stravaOAuth.grantTypeAuth}`;
+    return this.http.post(url, null).pipe(
+      catchError(this.handleError)
+    ) as Observable<Token>
   }
 
   public getAuthenticatedAthlete(): Observable<Athlete> {

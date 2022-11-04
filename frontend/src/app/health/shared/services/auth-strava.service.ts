@@ -21,7 +21,7 @@ export class AuthStravaService {
     }
 
     public initCodeFlow() {
-      window.location.href = `${environment.authBaseUrl}/connect/strava/redirect?callback=${environment.hostBaseUrl}/profile/strava-auth`
+      window.location.href = `${environment.stravaOAuth.loginUrl}?client_id=${environment.stravaOAuth.clientId}&redirect_uri=${environment.stravaOAuth.redirectUri}&scope=${environment.stravaOAuth.scope}&response_type=${environment.stravaOAuth.responseType}`
     }
 
     public setAuthenticatedUser(token: string) {
