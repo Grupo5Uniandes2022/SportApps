@@ -11,7 +11,7 @@ env:
   GAR_LOCATION: ${{ secrets.GET_GKE_CRED_CLUSTER_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
-  DEPLOYMENT_NAME: nest-back
+  DEPLOYMENT_NAME: user-deployment
   REPOSITORY: users-sportsapp
   IMAGE: nest-app
 jobs:
