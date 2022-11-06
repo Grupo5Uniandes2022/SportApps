@@ -12,6 +12,7 @@ import { AuthService } from '@app/auth/shared/services/auth.service';
 export interface Meal {
   name: string;
   ingredients: string[];
+  alergics: string[];
   timestamp: number;
   key: string;
   $exists: () => boolean;

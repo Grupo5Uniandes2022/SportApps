@@ -17,7 +17,7 @@ export const TYPE_CONTROL_ACCESSOR = {
 })
 export class WorkoutTypeComponent implements ControlValueAccessor {
 
-  selectors = ['strength', 'endurance'];
+  selectors = ['cycling', 'running'];
 
   value: string;
 
