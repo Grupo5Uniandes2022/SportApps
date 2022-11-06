@@ -6,6 +6,17 @@ on: # ¿Cuando ejecutar?
       - 'backend/**'
     branches: 
       - main
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
 env:
   PROJECT_ID: ${{ secrets.GET_GKE_CRED_PROJECT }}
   GAR_LOCATION: ${{ secrets.GET_GKE_CRED_CLUSTER_LOCATION }}
