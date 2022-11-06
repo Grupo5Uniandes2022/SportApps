@@ -48,7 +48,7 @@ jobs:
         if: steps.node-cache.outputs.cache-hit != 'true' 
         run: npm install
       - name: Run Build command
-        run: npm run build -- --prod
+        run: npm run build
       - name: Run Unit tests
         run: npm run test
       # Alternative option - authentication via credentials json
