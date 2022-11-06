@@ -7,7 +7,6 @@ env:
   GAR_LOCATION: ${{ secrets.GET_GKE_CRED_CLUSTER_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
-  DEPLOYMENT_NAME: sportapps-performance
 jobs:
   deploy:
     name: Kubernetes Performance
