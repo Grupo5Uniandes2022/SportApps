@@ -1,6 +1,22 @@
 name: 'Terraform Destroy'
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
+
+env:
+  GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
+  GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
+  NAMESPACE: sportapps-ns
 
 permissions:
   contents: read
@@ -38,19 +54,11 @@ jobs:
       run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-    # Set up kustomize
-    - name: Set up Kustomize
-      working-directory: ./k8s/performance
-      run: |-
-        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
-        chmod u+x ./kustomize
-
-    # Delete performance objects inside cluster GKE
+    # Delete all objects inside namespace
     - name: Delete
       working-directory: ./k8s/performance
       run: |-
-        ./kustomize build . | kubectl delete -f -
-        kubectl get services -o wide
+        kubectl delete all --all -n $NAMESPACE
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
