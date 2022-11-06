@@ -17,34 +17,6 @@ spec:
 
 ---
 
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: fe-hpa
-  namespace: sportapps-ns
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: front-deployment
-  minReplicas: 1
-  maxReplicas: 2
-  metrics:
-  - type: Resource
-    resource:
-     name: cpu
-     target:
-       type: Utilization
-       averageUtilization: 60
-  - type: Resource
-    resource:
-     name: memory
-     target:
-       type: Utilization
-       averageValue: 800Mi
-
----
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -81,3 +53,31 @@ spec:
         value: spot
         effect: NoSchedule
         operator: Equal
+
+---
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: fe-hpa
+  namespace: sportapps-ns
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: front-deployment
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+  - type: Resource
+    resource:
+     name: cpu
+     target:
+       type: Utilization
+       averageUtilization: 60
+  - type: Resource
+    resource:
+     name: memory
+     target:
+       type: Utilization
+       averageValue: 800Mi
