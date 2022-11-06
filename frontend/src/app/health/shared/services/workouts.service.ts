@@ -12,8 +12,8 @@ import { AuthService } from '@app/auth/shared/services/auth.service';
 export interface Workout {
   name: string;
   type: string;
-  strength: any;
-  endurance: any;
+  cycling: any;
+  running: any;
   timestamp: number;
   key: string;
   $exists: () => boolean;
@@ -50,11 +50,15 @@ export class WorkoutsService {
   }
 
   addWorkout(Workout: Workout) {
+    const newWorkout = Workout;
+    newWorkout.name = newWorkout.name + ' - ' + newWorkout.type;
     return this.db.list(`workouts/${this.uid}`).push(Workout);
   }
 
   updateWorkout(key: string, Workout: Workout) {
-    return this.db.object(`workouts/${this.uid}/${key}`).update(Workout);
+    const newWorkout = Workout;
+    newWorkout.name = newWorkout.name + ' - ' + newWorkout.type;
+    return this.db.object(`workouts/${this.uid}/${key}`).update(newWorkout);
   }
 
   removeWorkout(key: string) {

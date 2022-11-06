@@ -2,19 +2,19 @@
   <div class="workouts__title">
     <h1>
       <img src="assets/images/workout.svg">
-      Your workouts
+      Mis Entrenamientos
     </h1>
     <a
       class="btn__add"
       [routerLink]="['../workouts/new']">
       <img src="assets/images/add-white.svg">
-      New workout
+      Nuevo Entrenamiento
     </a>
   </div>
   <div *ngIf="workouts$ | async as workouts; else loading;">
     <div class="message" *ngIf="!workouts.length">
       <img src="assets/images/face.svg">
-      No workouts, add a new workout to start
+      No existen entrenamientos, crea uno para empezar.
     </div>
     <app-list-item
       *ngFor="let workout of workouts"
@@ -25,7 +25,7 @@
   <ng-template #loading>
     <div class="message">
       <img src="assets/images/loading.svg">
-      Fetching workouts...
+      Obteniendo entrenamientos...
     </div>
   </ng-template>
 </div>

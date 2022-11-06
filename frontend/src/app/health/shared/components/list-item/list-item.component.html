@@ -1,9 +1,14 @@
 <div class="list-item">
   <a [routerLink]="getRoute(item)">
-    <p class="list-item__name">{{ item.name }}</p>
+    <p class="list-item__name">
+      <strong>{{ item.name }}</strong>
+    </p>
     <p class="list-item__ingredients">
           <span *ngIf="item.ingredients; else showWorkout">
-            {{ item.ingredients | join }}
+            Intolerancias: {{ item.ingredients | join }}
+          </span> <br>
+          <span *ngIf="item.alergics; else showWorkout">
+          Alergias: {{ item.alergics | join }}
           </span>
     </p>
     <ng-template #showWorkout>
@@ -13,12 +18,12 @@
   <div
     class="list-item__delete"
     *ngIf="toggled">
-    <p>Delete item?</p>
+    <p>Remover item?</p>
     <button
       class="confirm"
       type="button"
       (click)="removeItem()">
-      Yes
+      Sí
     </button>
     <button
       class="cancel"
