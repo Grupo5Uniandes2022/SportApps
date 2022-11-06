@@ -22,13 +22,35 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    
     # Alternative option - authentication via credentials json
     - id: 'auth'
       uses: 'google-github-actions/auth@v0'
       with:
         credentials_json: '${{ secrets.GET_GKE_CRED_SA_KEY_JSON }}'
+
+    # Setup gcloud CLI
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - name: Set up GKE credentials
+      working-directory: ./k8s/performance
+      run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
+    # Set up kustomize
+    - name: Set up Kustomize
+      working-directory: ./k8s/performance
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+
+    # Delete performance objects inside cluster GKE
+    - name: Delete
+      working-directory: ./k8s/performance
+      run: |-
+        ./kustomize build . | kubectl delete -f -
+        kubectl get services -o wide
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
