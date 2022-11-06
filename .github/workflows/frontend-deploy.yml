@@ -6,12 +6,23 @@ on: # ¿Cuando ejecutar?
       - 'frontend/**'
     branches: 
       - main
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning' 
+        type: choice
+        options:
+        - info
+        - warning
+        - debug
 env:
   PROJECT_ID: ${{ secrets.GET_GKE_CRED_PROJECT }}
   GAR_LOCATION: ${{ secrets.GET_GKE_CRED_CLUSTER_LOCATION }}
   GKE_CLUSTER: ${{ secrets.GET_GKE_CRED_CLUSTER_NAME }}
   GKE_ZONE: ${{ secrets.GET_GKE_CRED_CLUSTER_ZONE_LOCATION }}
-  DEPLOYMENT_NAME: angular-front
+  DEPLOYMENT_NAME: front-deployment
   REPOSITORY: front-sportsapp
   IMAGE: front
 jobs:
