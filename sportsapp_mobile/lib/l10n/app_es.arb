@@ -1,0 +1,16 @@
+{
+    "helloWorld": "¡Hola Mundo!",
+  "login": "Iniciar sesión",
+  "email": "Correo electrónico",
+  "password":"Contraseña",
+  "enter":"Ingresar",
+  "createAccount":"Crear una cuenta nueva",
+  "bookedAsistence":"Has solicitado asistencia deportiva",
+  "docAppointment":"Solicitar cita con doctor",
+  "trainerAppointment":"Solicitar cita entrenador",
+  "profile":"perfil",
+  "settings":"configuración",
+  "mailHint":"correo@correo.co",
+  "invalidMail":"correo inválido",
+  "passValidation": "La contraseña debe tener al menos 6 carácteres"
+}
