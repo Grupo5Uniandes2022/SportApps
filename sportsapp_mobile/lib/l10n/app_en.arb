@@ -1,0 +1,16 @@
+{
+    "helloWorld": "Hello World!",
+    "login": "Login",
+    "email": "Email",
+    "password":"password",
+    "enter":"enter",
+    "createAccount":"create a new account",
+    "bookedAsistence":"You have booked sport assistance",
+    "docAppointment":"Book doctor appointment",
+    "trainerAppointment":"Book trainer appointment",
+    "profile":"profile",
+    "settings":"settings",
+    "mailHint":"mail@mail.co",
+    "invalidMail":"invalid mail",
+    "passValidation": "Password must have at least 6 char"
+}
