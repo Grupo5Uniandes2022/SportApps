@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { PayModule } from './pay/pay.module';
+import { FoodModule } from './food/food.module';
 
 @Module({
   imports: [
@@ -15,10 +16,11 @@ import { PayModule } from './pay/pay.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: true //No Usar en prod, en prod hay migraciones
+      synchronize: true, //No Usar en prod, en prod hay migraciones
     }),
     AuthModule,
-    PayModule
+    PayModule,
+    FoodModule,
   ],
   controllers: [],
   providers: [],

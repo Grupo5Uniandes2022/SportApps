@@ -19,9 +19,9 @@ describe('PayService', () => {
           useValue: {
             find: jest.fn(),
             create: jest.fn(),
-            save: jest.fn()
-          }
-        }
+            save: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
@@ -34,22 +34,24 @@ describe('PayService', () => {
   });
 
   it('should find all plans', async () => {
-    const paySpy = jest.spyOn(payRepository, 'find')
-    await service.findAll()
+    const paySpy = jest.spyOn(payRepository, 'find');
+    await service.findAll();
     expect(paySpy).toHaveBeenCalled();
   });
 
   it('should create a plan', async () => {
-    const paySpy = jest.spyOn(payRepository, 'create')
-    await service.create({features:['/test'],title:'test plan'});
+    const paySpy = jest.spyOn(payRepository, 'create');
+    await service.create({ features: ['/test'], title: 'test plan' });
     expect(paySpy).toHaveBeenCalled();
   });
   it('should create a plan with exception', async () => {
-    const paySpy = jest.spyOn(payRepository, 'create').mockImplementation(() => {
-      throw  new ConflictException('Conflict')
-    });
+    const paySpy = jest
+      .spyOn(payRepository, 'create')
+      .mockImplementation(() => {
+        throw new ConflictException('Conflict');
+      });
     try {
-     await service.create({features:['/test'],title:'test plan'});
+      await service.create({ features: ['/test'], title: 'test plan' });
     } catch (error) {
       expect(error.message).toBe('Conflict');
     }
