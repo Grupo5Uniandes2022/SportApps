@@ -32,8 +32,8 @@
 
 
 
-
-<div class="meals">
+<div *ngIf="meals$ | async as meals; else loading;">
+<div class="meals"  *ngIf="meals.length">
   <div class="meals__title">
     <h1>
       <img src="/assets/images/plan.svg"> Plan Nutricional Sugerido:
@@ -71,6 +71,7 @@
       <li>2 tajadas de pan</li>
       <li>piña (150 a 200grs)</li>
     </ul>
+  </div>
   </div>
 
 </div>

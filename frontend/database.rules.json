@@ -26,6 +26,12 @@
         ".read": "$uid === auth.uid",
         ".write": "$uid === auth.uid"
       }
+    },
+    "services": {
+      "$uid": {
+        ".read": true,
+        ".write": true
+      }
     }
   }
 }

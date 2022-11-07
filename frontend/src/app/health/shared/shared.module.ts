@@ -10,6 +10,7 @@ import { JoinPipe } from '@app/health/shared/pipes/join.pipe';
 import { WorkoutPipe } from '@app/health/shared/pipes/workout.pipe';
 
 import { MealsService } from '@app/health/shared/services/meals.service';
+import { ServicesService } from '@app/health/shared/services/services.service';
 import { WorkoutsService } from '@app/health/shared/services/workouts.service';
 import { ScheduleService } from '@app/health/shared/services/schedule.service';
 
@@ -39,7 +40,8 @@ export class SharedModule {
       providers: [
         MealsService,
         WorkoutsService,
-        ScheduleService
+        ScheduleService,
+        ServicesService
       ]
     };
   }
