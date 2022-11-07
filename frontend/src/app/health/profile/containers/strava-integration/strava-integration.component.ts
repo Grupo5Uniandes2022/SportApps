@@ -7,7 +7,7 @@ import { retry } from 'rxjs/operators';
 @Component({
   selector: 'app-strava-integration',
   templateUrl: './strava-integration.component.html',
-  styleUrls: ['./strava-integration.component.css']
+  styleUrls: ['./strava-integration.component.scss']
 })
 export class StravaIntegrationComponent implements OnInit {
 
@@ -19,7 +19,6 @@ export class StravaIntegrationComponent implements OnInit {
   ) {
     this.route.queryParams.subscribe((d) => {
       if (d.code) {
-        console.log('Code is ', d.code);
         this.stravaService.authenticateAthlete(d.code).subscribe(
           (t) => {
             if (t.access_token) {

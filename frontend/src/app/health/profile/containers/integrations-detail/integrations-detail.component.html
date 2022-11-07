@@ -8,12 +8,37 @@
       </div>
       <div class="media-content">
         <p class="title is-4">{{data.athlete.firstname}} {{data.athlete.lastname}}</p>
-        <p class="subtitle is-6">{{data.athlete.city}}, {{ data.athlete.state}}, {{data.athlete.country}}</p>
+        <div class="container text-center">
+          <div class="row">
+            <div class="col">
+              <p>Actividad mas Larga</p>
+            </div>
+            <div class="col">
+              <p>{{data.stats.biggest_ride_distance}} m</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Total de Actividades</p>
+            </div>
+            <div class="col">
+              <p>{{ data.stats.all_ride_totals.count}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <p>Total Tiempo Activo</p>
+            </div>
+            <div class="col">
+              <p>{{ ((data.stats.all_ride_totals.moving_time * 0.001) / 60)}} minutos</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <hr />
     <div>
-      <app-activity-summary [data]="data.stats"></app-activity-summary>
+      <!--app-activity-summary [data]="data.stats"></app-activity-summary-->
     </div>
   </div>
 </div>

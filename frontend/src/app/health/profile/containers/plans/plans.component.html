@@ -21,7 +21,7 @@
     </div>
   </ng-template>
 </div>
-<div class="plans">
+<div class="plans" *ngIf="roleStrava">
   <div class="plans__title">
     <h1>
       <img src="/assets/images/plan.svg">
@@ -39,7 +39,7 @@
     </div>
   </ng-template>
 </div>
-<div class="plans">
+<div class="plans" *ngIf="!roleStrava">
   <div class="plans__title">
     <h1>
       <img src="/assets/images/plan.svg">

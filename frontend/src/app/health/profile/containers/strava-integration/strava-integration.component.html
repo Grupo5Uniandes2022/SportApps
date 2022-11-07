@@ -1,11 +1,14 @@
-  <section class="hero is-fullheight">
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <h1 class="title">
-          Welcome!
-        </h1>
-        <button class="button is-large is-primary is-light" (click)="initCodeFlow()">Login</button>
-        <p>You will be redirected to Strava to login and authorise this application.</p>
-      </div>
+<div class="plans">
+  <div class="plans__title">
+    <h1>
+      <span id="title_plan" alt="You will be redirected to Strava to login and authorise this application">Inicie Sesión Strava</span>
+    </h1>
+    <button class="btn btn-primary" (click)="initCodeFlow()">Login</button>
+  </div>
+  <ng-template #loading>
+    <div class="message">
+      <img src="/assets/images/loading.svg">
+      Cargando Datos Strava...
     </div>
-  </section>
+  </ng-template>
+</div>

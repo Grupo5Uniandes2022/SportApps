@@ -9,6 +9,8 @@ export class IntegrationsDetailComponent implements OnInit {
 
   @Input() data: any;
 
+  constSeconds: number = 0.001;
+
   constructor() { }
 
   ngOnInit() {

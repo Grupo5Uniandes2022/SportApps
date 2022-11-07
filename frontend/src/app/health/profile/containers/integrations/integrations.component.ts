@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StravaService } from '../../../shared/services/strava.service';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, map, retry } from 'rxjs/operators';
+import { catchError, concatMap, first, map, retry } from 'rxjs/operators';
 
 @Component({
   selector: 'app-integrations',
@@ -34,7 +34,7 @@ export class IntegrationsComponent implements OnInit {
     )
     this.activities$ = this.stravaService.getActivities().pipe(
       retry(2),
-      map((res) => res.slice(0, 50)),
+      map((res) => res.slice(0, 10)),
       catchError((e) => {
         return throwError(e)
       })
