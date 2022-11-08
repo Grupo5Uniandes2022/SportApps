@@ -1,6 +1,8 @@
 export const environment = {
   production: true,
   stravaBaseUrl: 'https://www.strava.com/api/v3',
+  authBaseUrl: 'https://www.strava.com/oauth/authorize',
+  hostBaseUrl: 'http://localhost:4200',
   stravaOAuth: {
     clientId: '96159',
     redirectUri: 'http://localhost:4200/profile/strava-auth',
@@ -9,6 +11,7 @@ export const environment = {
     responseType: 'code',
     loginUrl: 'https://www.strava.com/oauth/authorize',
     oidc: false,
+    grantTypeAuth:'authorization_code',
     tokenEndpoint: 'https://www.strava.com/oauth/token',
     dummyClientSecret: 'f34f7ff6f22bad58ac431d1f59d35ce010829b16',
     showDebugInformation: false,
