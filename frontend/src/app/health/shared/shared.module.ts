@@ -13,6 +13,7 @@ import { MealsService } from '@app/health/shared/services/meals.service';
 import { ServicesService } from '@app/health/shared/services/services.service';
 import { WorkoutsService } from '@app/health/shared/services/workouts.service';
 import { ScheduleService } from '@app/health/shared/services/schedule.service';
+import { StravaService } from '@app/health/shared/services/strava.service';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ export class SharedModule {
         MealsService,
         WorkoutsService,
         ScheduleService,
-        ServicesService
+        StravaService,
+        ServicesService,
       ]
     };
   }

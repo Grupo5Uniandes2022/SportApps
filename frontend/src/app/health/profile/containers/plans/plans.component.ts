@@ -16,6 +16,7 @@ export class PlansComponent implements OnInit, OnDestroy {
 
   meals$: Observable<Meal[]>;
   subscription: Subscription;
+  roleStrava: String;
 
   constructor(private store: Store,
               private mealsService: MealsService) {}
@@ -23,6 +24,11 @@ export class PlansComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.meals$ = this.store.select<Meal[]>('meals');
     this.subscription = this.mealsService.meals$.subscribe();
+    this.roleStrava = this.readLocalStorageValue('token');
+  }
+
+  readLocalStorageValue(key: string): string {
+    return localStorage.getItem(key);
   }
 
   ngOnDestroy() {

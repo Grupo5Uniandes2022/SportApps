@@ -2,7 +2,7 @@
   <div class="plans__title">
     <h1>
       <img src="/assets/images/plan.svg">
-      <span id="title_plan">Plan de Subscripción</span>
+      <span id="title_plan">Plan de Subscripción</
     </h1>
     <a class="btn btn-outline-primary" [routerLink]="['../profile/update-plan']" role="button">Cambiar mi plan de subscripción</a>
 
@@ -19,8 +19,6 @@
     </div>
   </ng-template>
 </div>
-
-
 <div class="plans">
   <div class="plans__title">
     <h1>
@@ -50,38 +48,39 @@
   </ng-template>
 </div>
 
-
-
-
-<div class="plans">
+<div class="plans" *ngIf="!roleStrava">
   <div class="plans__title">
     <h1>
-      <img src="/assets/images/link.svg">
-      <span id="title_integrations">Integraciones</span>
+      <img src="/assets/images/plan.svg">
+      <span id="title_plan">Integracion Strava</span>
     </h1>
-  </div>
 
-  <div class="message">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 text-center">
-          <a class="btn" role="button" href="https://www.strava.com/?hl=es"  target="_blank" >
-            <img src="assets/images/strava.png" alt="Strava" width="150px" >
-          </a>
-        </div>
-        <div class="col-md-6 text-center">
-          <a class="btn" role="button" target="_blank" href="https://trainingpeaks.com/"  >
-            <img src="assets/images/tp.jpg" alt="TraininngPeaks" width="220px">
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+    <a class="btn btn-primary" [routerLink]="['../profile/strava-auth']" role="button">Integrar con Strava</a>
 
+
+  </div>
   <ng-template #loading>
     <div class="message">
       <img src="/assets/images/loading.svg">
-      Obteniendo perfiles...
+      Cargando Ingreso Strava...
+    </div>
+  </ng-template>
+</div>
+<div class="plans" *ngIf="roleStrava">
+  <div class="plans__title">
+    <h1>
+      <img src="/assets/images/plan.svg">
+      <span id="title_plan">Detalle Perfil Strava</span>
+    </h1>
+
+    <a class="btn btn-primary" [routerLink]="['../profile/integrations']" role="button">Datos Strava</a>
+
+
+  </div>
+  <ng-template #loading>
+    <div class="message">
+      <img src="/assets/images/loading.svg">
+      Cargando Datos Strava...
     </div>
   </ng-template>
 </div>
