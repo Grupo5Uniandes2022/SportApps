@@ -9,6 +9,7 @@ import { IntegrationsComponent } from './containers/integrations/integrations.co
 import { IntegrationsDetailComponent } from './containers/integrations-detail/integrations-detail.component';
 import { StravaIntegrationComponent } from './containers/strava-integration/strava-integration.component';
 import { httpInterceptorProviders } from '@app/interceptors/index';
+import { ActivityStravaComponent } from './containers/activity-strava/activity-strava.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { httpInterceptorProviders } from '@app/interceptors/index';
     IntegrationsComponent,
     IntegrationsDetailComponent,
     StravaIntegrationComponent,
+    ActivityStravaComponent,
   ],
   providers: [
     httpInterceptorProviders

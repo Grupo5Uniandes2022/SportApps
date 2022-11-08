@@ -5,6 +5,7 @@ import {PlanComponent} from './containers/plan/plan.component';
 import { IntegrationsComponent } from './containers/integrations/integrations.component';
 import { IntegrationsDetailComponent } from './containers/integrations-detail/integrations-detail.component';
 import { StravaIntegrationComponent } from './containers/strava-integration/strava-integration.component';
+import { ActivityStravaComponent } from './containers/activity-strava/activity-strava.component';
 
 
 export const ROUTES: Routes = [
@@ -13,6 +14,7 @@ export const ROUTES: Routes = [
   { path: 'integrations', component: IntegrationsComponent },
   { path: 'strava-details', component: IntegrationsDetailComponent },
   { path: 'strava-auth', component: StravaIntegrationComponent },
+  { path: 'strava-activity', component: ActivityStravaComponent },
 ];
 
 
