@@ -3,35 +3,36 @@
   <form [formGroup]="form">
     <div class="meal-form__name">
       <label>
-        <h3>Meal name</h3>
+        <h3>Tipo de Alimentación</h3>
 
-        <input
-          type="text"
-          placeholder="e.g. English Breakfast"
-          formControlName="name">
-
+        <select  class="form-select" formControlName="name">
+          <option>Vegetariano</option>
+          <option>Vegano</option>
+          <option>CurdiVegano</option>
+          <option>Consume Proteina Animal</option>
+        </select>
         <div class="error" *ngIf="required">
-          Workout name is required
+          Tipo de alimentación es un campo requerido
         </div>
       </label>
     </div>
 
     <div class="meal-form__food">
       <div class="meal-form__subtitle">
-        <h3>Food</h3>
+        <h3>Ingrese Alimentos que le generan Intolerancia</h3>
 
         <button
           type="button"
           class="meal-form__add"
           (click)="addIngredient()">
           <img src="assets/images/add-white.svg">
-          Add food
+          Agregar alimento
         </button>
       </div>
 
       <div formArrayName="ingredients">
         <label *ngFor="let c of ingredients.controls; index as i;">
-          <input [formControlName]="i" placeholder="e.g. Eggs">
+          <input [formControlName]="i" placeholder="ejm. Lacteos">
 
           <span
             class="meal-form__remove"
@@ -41,6 +42,32 @@
       </div>
     </div>
 
+    <div class="meal-form__food">
+      <div class="meal-form__subtitle">
+        <h3>Ingrese Alimentos que le generan Alergias</h3>
+
+        <button
+          type="button"
+          class="meal-form__add"
+          (click)="addIngredientAlergic()">
+          <img src="assets/images/add-white.svg">
+          Agregar alimento
+        </button>
+      </div>
+
+      <div formArrayName="alergics">
+        <label *ngFor="let c of alergics.controls; index as i;">
+          <input [formControlName]="i" placeholder="ejm. Nueces">
+
+          <span
+            class="meal-form__remove"
+            (click)="removeIngredientAlergic(i)">
+              </span>
+        </label>
+      </div>
+    </div>
+
+
     <div class="meal-form__submit">
       <div>
         <button
@@ -48,7 +75,7 @@
           class="button"
           *ngIf="!exists"
           (click)="createMeal()">
-          Create meal
+          Ingresar datos alimenticios
         </button>
 
         <button
@@ -56,13 +83,13 @@
           class="button"
           *ngIf="exists"
           (click)="updateMeal()">
-          Save
+          Guardar
         </button>
 
         <a
           class="button button--cancel"
           [routerLink]="['../']">
-          Cancel
+          Cancelar
         </a>
       </div>
 

@@ -29,7 +29,8 @@ export class MealFormComponent implements OnChanges {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    ingredients: this.fb.array([''])
+    ingredients: this.fb.array(['']),
+    alergics:  this.fb.array(['']),
   });
 
   constructor(
@@ -40,6 +41,7 @@ export class MealFormComponent implements OnChanges {
     if (this.meal && this.meal.name) {
       this.exists = true;
       this.emptyIngredients();
+      this.emptyAlergics();
 
       const value = this.meal;
       this.form.patchValue(value);
@@ -50,12 +52,24 @@ export class MealFormComponent implements OnChanges {
         }
       }
 
+      if (value.alergics) {
+        for (const item of value.alergics) {
+          this.alergics.push(new FormControl(item));
+        }
+      }
+
     }
   }
 
   emptyIngredients() {
     while (this.ingredients.controls.length) {
       this.ingredients.removeAt(0);
+    }
+  }
+
+  emptyAlergics() {
+    while (this.alergics.controls.length) {
+      this.alergics.removeAt(0);
     }
   }
 
@@ -70,12 +84,24 @@ export class MealFormComponent implements OnChanges {
     return this.form.get('ingredients') as FormArray;
   }
 
+  get alergics() {
+    return this.form.get('alergics') as FormArray;
+  }
+
   addIngredient() {
     this.ingredients.push(new FormControl(''));
   }
 
   removeIngredient(index: number) {
     this.ingredients.removeAt(index);
+  }
+
+  addIngredientAlergic() {
+    this.alergics.push(new FormControl(''));
+  }
+
+  removeIngredientAlergic(index: number) {
+    this.alergics.removeAt(index);
   }
 
   createMeal() {

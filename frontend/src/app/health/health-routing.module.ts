@@ -16,6 +16,11 @@ export const ROUTES: Routes = [
     loadChildren: './meals/meals.module#MealsModule'
   },
   {
+    path: 'services',
+    canActivate: [AuthGuard],
+    loadChildren: './services/services.module#ServicesModule'
+  },
+  {
     path: 'workouts',
     canActivate: [AuthGuard],
     loadChildren: './workouts/workouts.module#WorkoutsModule'

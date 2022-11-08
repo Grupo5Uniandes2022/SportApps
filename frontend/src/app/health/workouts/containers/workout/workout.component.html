@@ -3,7 +3,7 @@
     <h1>
       <img src="assets/images/workout.svg">
       <span *ngIf="workout$ | async as workout; else title;">
-            {{ workout.name ? 'Edit' : 'Create' }} workout
+            {{ workout.name ? 'Editar' : 'Crear' }} Entrenamiento
           </span>
       <ng-template #title>
         Loading...

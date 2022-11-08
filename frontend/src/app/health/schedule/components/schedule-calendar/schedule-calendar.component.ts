@@ -25,10 +25,9 @@ export class ScheduleCalendarComponent implements OnChanges {
   select = new EventEmitter<any>();
 
   sections = [
-    { key: 'morning', name: 'Morning' },
-    { key: 'lunch', name: 'Lunch' },
-    { key: 'evening', name: 'Evening' },
-    { key: 'snacks', name: 'Snacks and Drinks' },
+    { key: 'morning', name: 'Mañana' },
+    { key: 'lunch', name: 'Tarde' },
+    { key: 'evening', name: 'Noche' },
   ];
 
   selectedDayIndex: number;

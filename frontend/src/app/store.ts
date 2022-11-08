@@ -7,6 +7,7 @@ import { User } from '@app/auth/shared/services/auth.service';
 import { Meal } from '@app/health/shared/services/meals.service';
 import { Workout } from '@app/health/shared/services/workouts.service';
 import { ScheduleItem } from '@app/health/shared/services/schedule.service';
+import { Service } from '@app/health/shared/services/services.service';
 
 
 export interface State {
@@ -16,6 +17,7 @@ export interface State {
   schedule: ScheduleItem[];
   date: Date;
   workouts: Workout[];
+  services: Service[];
   [key: string]: any;
 }
 
@@ -25,7 +27,8 @@ const state: State = {
   selected: undefined,
   schedule: undefined,
   date: undefined,
-  workouts: undefined
+  workouts: undefined,
+  services: undefined
 };
 
 @Injectable({ providedIn: 'root' })

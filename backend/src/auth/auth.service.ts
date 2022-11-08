@@ -43,7 +43,7 @@ export class AuthService {
       const user = await this.userRepository.findOne({
         where: {email},
         select: {email: true, password: true, id: true},
-        relations: ['pay']
+        relations: ['pay','userLimitation']
       });
 
       if(!user){
@@ -78,6 +78,13 @@ export class AuthService {
 
     console.log(error)
     throw new InternalServerErrorException('Please check server logs');
+  }
+
+  async addDoctor(idDoctor){
+      const doctor =  await this.userRepository.findOneBy({id: idDoctor});
+      doctor.roles = ['user','doc'];
+      await this.userRepository.save(doctor);
+      return 'ok';
   }
 
 }
