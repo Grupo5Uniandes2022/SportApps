@@ -14,7 +14,7 @@
               <p>Actividad mas Larga</p>
             </div>
             <div class="col">
-              <p>{{data.stats.biggest_ride_distance}} m</p>
+              <p>{{data.stats.biggest_ride_distance / 1000}} km</p>
             </div>
           </div>
           <div class="row">
@@ -30,7 +30,7 @@
               <p>Total Tiempo Activo</p>
             </div>
             <div class="col">
-              <p>{{ ((data.stats.all_ride_totals.moving_time * 0.001) / 60)}} minutos</p>
+              <p>{{ ((data.stats.all_ride_totals.moving_time * 0.001) / 60) | number: '1.1-2'}} minutos</p>
             </div>
           </div>
         </div>
