@@ -4,11 +4,15 @@ import { Repository } from 'typeorm';
 import { Pay } from './entities/pay.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { ConflictException } from '@nestjs/common';
+import { User } from '../auth/entities/user.entity';
 
 describe('PayService', () => {
   let service: PayService;
   let payRepository: Repository<Pay>;
+  let userRepository: Repository<User>;
   const PAY_REPOSITORY_TOKEN = getRepositoryToken(Pay);
+  const USER_REPOSITORY_TOKEN = getRepositoryToken(User);
+  
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -21,12 +25,20 @@ describe('PayService', () => {
             create: jest.fn(),
             save: jest.fn()
           }
+        },{
+          provide: USER_REPOSITORY_TOKEN,
+          useValue: {
+            findOne: jest.fn(),
+            save: jest.fn(),
+            findOneBy: jest.fn()
+          }
         }
       ],
     }).compile();
 
     service = module.get<PayService>(PayService);
     payRepository = module.get<Repository<Pay>>(PAY_REPOSITORY_TOKEN);
+    userRepository = module.get<Repository<User>>(USER_REPOSITORY_TOKEN);
   });
 
   it('should be defined', () => {

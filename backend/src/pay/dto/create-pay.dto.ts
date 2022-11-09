@@ -1,7 +1,8 @@
-import { IsArray, IsString } from "class-validator";
+import { IsArray, IsIn, IsString } from "class-validator";
 
 export class CreatePayDto {
 
+  @IsIn(['gratis','intermedio','premium'])
   @IsString()
   title: string;
 
