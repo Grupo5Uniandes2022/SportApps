@@ -3,13 +3,16 @@ import { AuthService } from '../auth/auth.service';
 import { EventsService } from '../events/events.service';
 import {v4 as uuid} from 'uuid';
 import { CreateUserDto } from '../auth/dto/create-user.dto';
+import { PayService } from '../pay/pay.service';
+import { CreatePayDto } from '../pay/dto/create-pay.dto';
 
 @Injectable()
 export class SeedService {
   
   constructor(
     private readonly authService: AuthService,
-    private readonly eventService: EventsService
+    private readonly eventService: EventsService,
+    private readonly payService:PayService
   ) {
     
   }
@@ -18,6 +21,19 @@ export class SeedService {
   }
 
   private async insertNewDoctors(){
+    const pay: CreatePayDto[] = [{
+      title:'gratis',
+      features: ['/home','/pay','/search']
+    },
+    {
+      title: 'intermedio',
+      features: ['/home','/pay','/search','/calendar','/workout','/plan']
+    },
+    {
+      title: 'premium',
+      features: ['/home','/pay','/search','/calendar','/workout','/plan','/live','/group','/book']
+    }
+  ]
     const users: CreateUserDto[] = [{
       fullName: 'doc',
       email: 'doc@doc.com',
@@ -48,6 +64,9 @@ export class SeedService {
         doctorPromises.push(this.eventService.addEvents(doctor, 5))
       })
       await Promise.all(doctorPromises);
+      const payPromises =[];
+      pay.forEach(pay => payPromises.push(this.payService.create(pay)))
+      await Promise.all(payPromises);
       return 'seed ok';
 
     }
