@@ -74,3 +74,10 @@ spec:
                 name: front
                 port:
                   number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: user
+                port:
+                  number: 3000
