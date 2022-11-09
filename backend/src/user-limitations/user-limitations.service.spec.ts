@@ -44,12 +44,12 @@ describe('UserLimitationsService', () => {
 
   it('should add user limitations to user', () => {
     const userSpy = jest.spyOn(userRepository,'findOneBy').mockResolvedValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null, events: []
     });
     const userLimitSpy = jest.spyOn(userLimitationsRepository,'create').mockReturnValue({
       id:'2',alimentationType: 'test', alergies: [], foodIntolerances:[]
     });
-    const userRepoSpy = jest.spyOn(userRepository,'save').mockResolvedValue({ id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []}, userLimitation: { id:'2',alimentationType: 'test', alergies: [], foodIntolerances:[]}});
+    const userRepoSpy = jest.spyOn(userRepository,'save').mockResolvedValue({ id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []}, userLimitation: { id:'2',alimentationType: 'test', alergies: [], foodIntolerances:[]}, events:[]});
     expect(userRepoSpy).toHaveBeenCalledWith({ id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []}, userLimitation: { id:'2',alimentationType: 'test', alergies: [], foodIntolerances:[]}})
 
   })

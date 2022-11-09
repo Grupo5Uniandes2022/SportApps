@@ -48,7 +48,7 @@ describe('AuthService', () => {
   });
   it('should create user', async () => {
     jest.spyOn(userRepository,'create').mockReturnValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null, events: []
     });
     await service.create({
       fullName:'test',
@@ -84,7 +84,7 @@ describe('AuthService', () => {
   it('should login user', async () => {
     jest.spyOn(BcryptUtils, 'compareSync').mockReturnValue(true);
     jest.spyOn(userRepository,'findOne').mockResolvedValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null, events: []
     });
     await service.login({
       email:'test',
@@ -95,7 +95,7 @@ describe('AuthService', () => {
   it('should throw credentials invalid user wrong password', async () => {
     jest.spyOn(BcryptUtils, 'compareSync').mockReturnValue(false);
     jest.spyOn(userRepository,'findOne').mockResolvedValue({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null, events: []
     });
     await expect(service.login({
       email:'test',
@@ -115,7 +115,7 @@ describe('AuthService', () => {
   it('should check status', () => {
     const jwtSpy = jest.spyOn(JwtService.prototype,'sign')
     service.checkAuthStatus({
-      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null
+      id: '1', email: 'test', password: 'sdadas', fullName: 'test', isActive: true, roles: [], pay: {id:'test', title:'test plan',features: ["te1"], users: []},userLimitation:null, events:[]
     });
     expect(jwtSpy).not.toHaveBeenCalled()
   });
