@@ -6,6 +6,7 @@ import { PayModule } from './pay/pay.module';
 import { UserLimitationsModule } from './user-limitations/user-limitations.module';
 import { EventsModule } from './events/events.module';
 import { SeedModule } from './seed/seed.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { SeedModule } from './seed/seed.module';
     PayModule,
     UserLimitationsModule,
     EventsModule,
-    SeedModule
+    SeedModule,
+    ServicesModule
   ],
   controllers: [],
   providers: [],
