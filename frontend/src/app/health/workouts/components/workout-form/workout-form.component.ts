@@ -3,6 +3,7 @@ import { FormArray, FormGroup, FormBuilder, FormControl, Validators } from '@ang
 
 import { Workout } from '@app/health/shared/services/workouts.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Router, RouterModule, Routes} from '@angular/router';
 
 @Component({
   selector: 'app-workout-form',
@@ -36,7 +37,8 @@ export class WorkoutFormComponent implements OnChanges {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   get placeholder() {
@@ -79,6 +81,7 @@ export class WorkoutFormComponent implements OnChanges {
       console.log(this.form.value);
       this.http.post<any>('http://localhost:3000/api/events', body, { headers })
         .toPromise().then((data: any) => {
+        this.router.navigate(['/workouts']);
         console.log(data);
       });
 
