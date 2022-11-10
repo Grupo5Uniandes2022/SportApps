@@ -2,7 +2,7 @@ import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter, Chang
 import { FormArray, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 import { Workout } from '@app/health/shared/services/workouts.service';
-
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-workout-form',
@@ -30,19 +30,13 @@ export class WorkoutFormComponent implements OnChanges {
   form = this.fb.group({
     name: ['', Validators.required],
     type: 'cycling',
-    cycling: this.fb.group({
-      reps: 0,
-      sets: 0,
-      weight: 0
-    }),
-    running: this.fb.group({
-      distance: 0,
-      duration: 0
-    })
+    reps: 0,
+    sets: 0
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient
   ) {}
 
   get placeholder() {
@@ -66,7 +60,28 @@ export class WorkoutFormComponent implements OnChanges {
 
   createWorkout() {
     if (this.form.valid) {
-      this.create.emit(this.form.value);
+      // this.create.emit(this.form.value);
+      // tslint:disable-next-line:max-line-length
+      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyNzI0MDc3LWRiYTEtNDE1OS05MjNhLWZjOTFhOTViN2NlYSIsImlhdCI6MTY2ODA0NDU0NCwiZXhwIjoxNjY4MDUxNzQ0fQ.s9EfWsfMl6tkY4arGmWY5POkWlzq8qoFt8oNj-BNVPo';
+      const headers = new HttpHeaders()
+        .set('Content-Type' , 'application/json')
+        .set('Authorization' , 'Bearer ' + token );
+
+      const body = {
+        duration: this.form.value.reps,
+        distance: this.form.value.sets,
+        startDate: '2016-09-18T17:34:02.666Z',
+        endDate: '2016-09-18T17:34:02.666Z',
+        title: `${this.form.value.name} - ${this.form.value.type}`,
+        type: 'training'
+      };
+
+      console.log(this.form.value);
+      this.http.post<any>('http://localhost:3000/api/events', body, { headers })
+        .toPromise().then((data: any) => {
+        console.log(data);
+      });
+
     }
   }
 

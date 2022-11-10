@@ -1,4 +1,4 @@
-import { IsDate, IsDateString, IsIn, IsString } from "class-validator";
+import { IsDate, IsDateString, IsIn, IsString, IsInt } from "class-validator";
 
 export class CreateEventDto {
 
@@ -13,5 +13,11 @@ export class CreateEventDto {
 
   @IsIn(['training','group','appointment','free'])
   type: string;
+
+  @IsInt()
+  duration: number;
+
+  @IsInt()
+  distance: number;
 
 }

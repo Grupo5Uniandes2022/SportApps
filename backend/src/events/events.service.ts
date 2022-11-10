@@ -52,6 +52,8 @@ export class EventsService {
       createDto.startDate = new Date();
       createDto.startDate.setDate(createDto.startDate.getDay() + i);
       createDto.type = states[Math.floor(Math.random() * 2)];
+      createDto.duration = Math.floor(Math.random() * 10);
+      createDto.distance = Math.floor(Math.random() * 10);
       createDto.title = createDto.type;
       await this.create(user, createDto );
     }
