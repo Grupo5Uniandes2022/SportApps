@@ -77,6 +77,13 @@ spec:
             requests:
               cpu: 500m
               memory: 0.7Gi
+          livenessProbe:
+            httpGet:
+              path: /api/liveness/health-check
+              scheme: HTTP
+              port: 3000
+            failureThreshold: 30
+            periodSeconds: 10
           env:
             - name: DB_HOST
               valueFrom:
