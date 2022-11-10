@@ -5,7 +5,7 @@ LABEL autor="Sport Apps Team"
 LABEL vendor="Uniandes"
 
 # Environment variables
-ARG CONTAINER_PATH=./dist
+ARG CONTAINER_PATH=.
 ARG RUNTIME_FOLDER="/usr/apps"
 ENV RUNTIME_FOLDER=${RUNTIME_FOLDER}
 
@@ -16,7 +16,7 @@ ARG USER="uniandes"
 ENV USER=${USER}
 
 # Deployment artifacts
-COPY ./dist $RUNTIME_FOLDER/
+COPY ${CONTAINER_PATH} $RUNTIME_FOLDER/
 
 # Testing changes
 RUN pwd
