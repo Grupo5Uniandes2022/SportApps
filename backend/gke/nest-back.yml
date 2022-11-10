@@ -82,6 +82,7 @@ spec:
               path: /api/liveness/health-check
               scheme: HTTP
               port: 3000
+            initialDelaySeconds: 60
             failureThreshold: 30
             periodSeconds: 10
           readinessProbe:
