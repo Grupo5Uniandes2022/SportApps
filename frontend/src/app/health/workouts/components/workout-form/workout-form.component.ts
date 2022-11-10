@@ -62,7 +62,6 @@ export class WorkoutFormComponent implements OnChanges {
 
   createWorkout() {
     if (this.form.valid) {
-      // this.create.emit(this.form.value);
       // tslint:disable-next-line:max-line-length
       const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyNzI0MDc3LWRiYTEtNDE1OS05MjNhLWZjOTFhOTViN2NlYSIsImlhdCI6MTY2ODA0NDU0NCwiZXhwIjoxNjY4MDUxNzQ0fQ.s9EfWsfMl6tkY4arGmWY5POkWlzq8qoFt8oNj-BNVPo';
       const headers = new HttpHeaders()

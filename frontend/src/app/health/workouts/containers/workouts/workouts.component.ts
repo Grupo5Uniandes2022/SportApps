@@ -46,6 +46,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
 
     this.http.get<any>('http://localhost:3000/api/events', {headers})
       .toPromise().then((data: any) => {
+        data = data.filter(element => element.type.toString().toLowerCase().includes('training'));
         this.workouts$ = data;
         console.log(data);
     });
