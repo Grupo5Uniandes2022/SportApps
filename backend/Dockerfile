@@ -16,7 +16,7 @@ ARG USER="uniandes"
 ENV USER=${USER}
 
 # Deployment artifacts
-COPY ${CONTAINER_PATH} $RUNTIME_FOLDER/
+COPY ./dist $RUNTIME_FOLDER/
 
 # User permissions
 RUN addgroup -g 1005 -S ${USER} && \
