@@ -14,6 +14,7 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { WebComponent } from './web/web.component';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from '../app/interceptors/index';
+import { NavbarAdminComponent } from '@app/root/components/navbar-admin/navbar-admin.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { httpInterceptorProviders } from '../app/interceptors/index';
     AppComponent,
     HeaderComponent,
     NavbarComponent,
+    NavbarAdminComponent,
     WebComponent
   ],
   imports: [
