@@ -5,6 +5,8 @@ metadata:
   namespace: sportapps-ns
   labels:
     app: user
+  annotations:
+    cloud.google.com/load-balancer-neg-ready: '{"ingress": false}'
 spec:
   type: NodePort
   selector:
