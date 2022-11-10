@@ -67,14 +67,28 @@ spec:
   rules:
     - http:
         paths:
-          - path: /front
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: front
                 port:
                   number: 80
-          - path: /back
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sportapps-ingress-api
+  namespace: sportapps-ns
+  labels:
+    app: sportapps-ingress-api
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /
             pathType: Prefix
             backend:
               service:
