@@ -19,6 +19,12 @@ export class Event {
   @Column()
   type: string;
 
+  @Column()
+  distance: number;
+
+  @Column()
+  duration: number;
+
   @ManyToOne(() => User, (user) => user.events)
   user: User;
 

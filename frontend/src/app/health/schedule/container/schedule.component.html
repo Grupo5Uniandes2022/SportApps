@@ -10,7 +10,8 @@
   <app-schedule-assign
     *ngIf="open"
     [section]="selected$ | async"
-    [list]="list$ | async"
+    [list]="list$"
+    [date]="date$ | async"
     (update)="assignItem($event)"
     (cancel)="closeAssign()">
   </app-schedule-assign>

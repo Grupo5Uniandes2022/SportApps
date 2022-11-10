@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit
 
 import { Meal } from '@app/health/shared/services/meals.service';
 import { Workout } from '@app/health/shared/services/workouts.service';
+import { DatePipe } from '@angular/common';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 
 @Component({
@@ -18,7 +20,10 @@ export class ScheduleAssignComponent implements OnInit {
   section: any;
 
   @Input()
-  list: Meal[] | Workout[];
+  list: null;
+
+  @Input()
+  date: Date;
 
   @Output()
   update = new EventEmitter<any>();
@@ -26,15 +31,17 @@ export class ScheduleAssignComponent implements OnInit {
   @Output()
   cancel = new EventEmitter<any>();
 
+  constructor(private datePipe: DatePipe, private http: HttpClient) {}
+
   ngOnInit() {
-    this.selected = [...this.section.assigned];
+    this.selected = []; // [...this.section.assigned];
   }
 
-  toggleItem(name: string) {
-    if (this.exists(name)) {
-      this.selected = this.selected.filter(item => item !== name);
+  toggleItem(id: string) {
+    if (this.exists(id)) {
+      this.selected = this.selected.filter(item => item !== id);
     } else {
-      this.selected = [...this.selected, name];
+      this.selected = [...this.selected, id];
     }
   }
 
@@ -47,13 +54,34 @@ export class ScheduleAssignComponent implements OnInit {
   }
 
   updateAssign() {
-    this.update.emit({
-      [this.section.type]: this.selected
+    console.log(this.selected);
+    // tslint:disable-next-line:max-line-length
+    const token = localStorage.getItem('tokenAuth');
+    const headers = new HttpHeaders()
+      .set('Content-Type' , 'application/json')
+      .set('Authorization' , 'Bearer ' + token );
+
+    const body = {
+      startDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+      endDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd')
+    };
+
+    this.http.put<any>('http://localhost:3000/api/events/' + this.selected[0] , body, { headers })
+      .toPromise().then((data: any) => {
+      // this.router.navigate(['/workouts']);
     });
   }
 
   cancelAssign() {
     this.cancel.emit();
+  }
+
+  getEventsFromSection(list: any, type: string ) {
+      if (type === 'workouts') {
+        return list.filter(item => item.type === 'training');
+      } else {
+        return list.filter(item => item.type === 'appointment');
+      }
   }
 
 }
