@@ -18,6 +18,11 @@ ENV USER=${USER}
 # Deployment artifacts
 COPY ./dist $RUNTIME_FOLDER/
 
+# Testing changes
+RUN pwd
+RUN ls -la
+RUN ls ./dist
+
 # User permissions
 RUN addgroup -g 1005 -S ${USER} && \
     adduser -u 1005 -S ${USER} -G ${USER} && \
