@@ -63,7 +63,7 @@ export class WorkoutFormComponent implements OnChanges {
   createWorkout() {
     if (this.form.valid) {
       // tslint:disable-next-line:max-line-length
-      const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyNzI0MDc3LWRiYTEtNDE1OS05MjNhLWZjOTFhOTViN2NlYSIsImlhdCI6MTY2ODA0NDU0NCwiZXhwIjoxNjY4MDUxNzQ0fQ.s9EfWsfMl6tkY4arGmWY5POkWlzq8qoFt8oNj-BNVPo';
+      const token = localStorage.getItem('tokenAuth');
       const headers = new HttpHeaders()
         .set('Content-Type' , 'application/json')
         .set('Authorization' , 'Bearer ' + token );
@@ -77,11 +77,9 @@ export class WorkoutFormComponent implements OnChanges {
         type: 'training'
       };
 
-      console.log(this.form.value);
       this.http.post<any>('http://localhost:3000/api/events', body, { headers })
         .toPromise().then((data: any) => {
         this.router.navigate(['/workouts']);
-        console.log(data);
       });
 
     }

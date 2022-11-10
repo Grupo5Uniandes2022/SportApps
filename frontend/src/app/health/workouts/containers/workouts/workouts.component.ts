@@ -39,7 +39,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
   }
 
   getWorkouts() {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyNzI0MDc3LWRiYTEtNDE1OS05MjNhLWZjOTFhOTViN2NlYSIsImlhdCI6MTY2ODA0NDU0NCwiZXhwIjoxNjY4MDUxNzQ0fQ.s9EfWsfMl6tkY4arGmWY5POkWlzq8qoFt8oNj-BNVPo';
+    const token = localStorage.getItem('tokenAuth');
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Bearer ' + token);
@@ -48,7 +48,6 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
       .toPromise().then((data: any) => {
         data = data.filter(element => element.type.toString().toLowerCase().includes('training'));
         this.workouts$ = data;
-        console.log(data);
     });
   }
 

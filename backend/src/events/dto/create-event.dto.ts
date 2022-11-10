@@ -6,12 +6,15 @@ export class CreateEventDto {
   startDate: Date;
   
   @IsDateString()
+  @IsOptional()
   endDate: Date;
   
   @IsString()
+  @IsOptional()
   title: string;
 
   @IsIn(['training','group','appointment','free'])
+  @IsOptional()
   type: string;
 
   @IsInt()

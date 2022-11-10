@@ -19,15 +19,15 @@
     <div class="schedule-assign__list">
           <span
             class="schedule-assign__empty"
-            *ngIf="!list?.length">
+            *ngIf="getEventsFromSection(list, section.type).length === 0">
             <img src="assets/images/face.svg">
             Nada por asignar
           </span>
       <div
-        *ngFor="let item of list"
-        [class.active]="exists(item.name)"
-        (click)="toggleItem(item.name)">
-        {{ item.name }}
+        *ngFor="let item of getEventsFromSection(list, section.type)"
+        [class.active]="exists(item.id)"
+        (click)="toggleItem(item.id)">
+        {{ item.title }}
       </div>
     </div>
     <div class="schedule-assign__submit">
