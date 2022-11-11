@@ -7,6 +7,7 @@ import { UserLimitationsModule } from './user-limitations/user-limitations.modul
 import { EventsModule } from './events/events.module';
 import { SeedModule } from './seed/seed.module';
 import { ServicesModule } from './services/services.module';
+import { LivenessModule } from './liveness/liveness.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { ServicesModule } from './services/services.module';
     UserLimitationsModule,
     EventsModule,
     SeedModule,
-    ServicesModule
+    ServicesModule,
+    LivenessModule,
   ],
   controllers: [],
   providers: [],
