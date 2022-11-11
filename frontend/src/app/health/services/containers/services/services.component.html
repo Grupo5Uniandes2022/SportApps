@@ -16,10 +16,10 @@
       No existen registros de servicios, agrega información para empezar.
     </div>
 
-    <app-list-item *ngFor="let service of services"
+    <app-list-item-services *ngFor="let service of services"
                    [item]="service"
                    (remove)="removeService($event)">
-    </app-list-item>
+    </app-list-item-services>
     <!-- meals ngFor -->
   </div>
   <ng-template #loading>

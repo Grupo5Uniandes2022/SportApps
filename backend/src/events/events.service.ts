@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../auth/entities/user.entity';
 import { CreateEventDto } from './dto/create-event.dto';
+import { UpdateEventDto } from './dto/update-event.dto';
 import { Event } from './entities/event.entity';
 
 @Injectable()
@@ -21,6 +22,11 @@ export class EventsService {
     const newEvent = await this.eventRepository.create(createEventDto);
     newEvent.user = user;
     await    this.eventRepository.save(newEvent);
+    return {ok: true}
+  }
+
+  async update(user: User, idEvento: string, updateEventDto: UpdateEventDto) {
+    const updateEvent = await this.eventRepository.update(idEvento, updateEventDto);
     return {ok: true}
   }
 
@@ -52,6 +58,8 @@ export class EventsService {
       createDto.startDate = new Date();
       createDto.startDate.setDate(createDto.startDate.getDay() + i);
       createDto.type = states[Math.floor(Math.random() * 2)];
+      createDto.duration = Math.floor(Math.random() * 10);
+      createDto.distance = Math.floor(Math.random() * 10);
       createDto.title = createDto.type;
       await this.create(user, createDto );
     }

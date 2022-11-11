@@ -7,7 +7,8 @@ import { Meal, MealsService } from '@app/health/shared/services/meals.service';
 import { Workout, WorkoutsService } from '@app/health/shared/services/workouts.service';
 
 import { Store } from '@app/store';
-
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {AppSettings} from '../../../config';
 
 @Component({
   selector: 'app-schedule',
@@ -20,7 +21,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   date$: Observable<Date>;
   selected$: Observable<any>;
-  list$: Observable<Meal[] | Workout[]>;
+  list$: null;
+  services: null;
   subscriptions: Subscription[] = [];
   schedule$: Observable<ScheduleItem[]>;
 
@@ -29,14 +31,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     private scheduleService: ScheduleService,
     private mealsService: MealsService,
     private workoutsService: WorkoutsService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.date$ = this.store.select('date');
-    this.schedule$ = this.store.select('schedule');
+     this.schedule$ = this.store.select('schedule');
     this.selected$ = this.store.select('selected');
-    this.list$ = this.store.select('list');
-
+    this.getListEvents('training');
+    this.getListService('');
     this.subscriptions = [
       this.scheduleService.schedule$.subscribe(),
       this.scheduleService.selected$.subscribe(),
@@ -67,6 +70,33 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   closeAssign() {
     this.open = false;
+  }
+
+  getListEvents(type : string) {
+    const token = localStorage.getItem('tokenAuth');
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + token);
+
+    this.http.get<any>(AppSettings.API_ENDPOINT + '/api/events', {headers})
+      .toPromise().then((data: any) => {
+      // data = data.filter(element => element.type.toString().toLowerCase().includes(type));
+      this.list$ = data;
+    });
+  }
+
+  getListService(type : string) {
+    const token = localStorage.getItem('tokenAuth');
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + token);
+
+    this.http.get<any>(AppSettings.API_ENDPOINT + '/api/services', {headers})
+      .toPromise().then((data: any) => {
+      // data = data.filter(element => element.type.toString().toLowerCase().includes(type));
+      console.log(data);
+      this.services = data;
+    });
   }
 
 }

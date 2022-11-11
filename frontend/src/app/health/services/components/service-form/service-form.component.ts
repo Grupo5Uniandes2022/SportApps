@@ -1,8 +1,10 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Service } from '@app/health/shared/services/services.service';
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-service-form',
@@ -29,49 +31,30 @@ export class ServiceFormComponent implements OnChanges {
 
   form = this.fb.group({
     name: ['', Validators.required],
-    ingredients: this.fb.array(['']),
-    alergics:  this.fb.array(['']),
+    type: ['Otro', Validators.required],
+    address: ['', Validators.required],
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (this.service && this.service.name) {
       this.exists = true;
-      this.emptyIngredients();
-      this.emptyAlergics();
 
       const value = this.service;
       this.form.patchValue(value);
 
-      if (value.ingredients) {
-        for (const item of value.ingredients) {
-          this.ingredients.push(new FormControl(item));
-        }
-      }
-
-      if (value.alergics) {
-        for (const item of value.alergics) {
-          this.alergics.push(new FormControl(item));
-        }
-      }
-
     }
   }
-
-  emptyIngredients() {
-    while (this.ingredients.controls.length) {
-      this.ingredients.removeAt(0);
-    }
-  }
-
-  emptyAlergics() {
+/*emptyAlergics() {
     while (this.alergics.controls.length) {
       this.alergics.removeAt(0);
     }
-  }
+  }*/
 
   get required() {
     return (
@@ -80,33 +63,25 @@ export class ServiceFormComponent implements OnChanges {
     );
   }
 
-  get ingredients() {
-    return this.form.get('ingredients') as FormArray;
-  }
-
-  get alergics() {
-    return this.form.get('alergics') as FormArray;
-  }
-
-  addIngredient() {
-    this.ingredients.push(new FormControl(''));
-  }
-
-  removeIngredient(index: number) {
-    this.ingredients.removeAt(index);
-  }
-
-  addIngredientAlergic() {
-    this.alergics.push(new FormControl(''));
-  }
-
-  removeIngredientAlergic(index: number) {
-    this.alergics.removeAt(index);
-  }
-
   createService() {
     if (this.form.valid) {
-      this.create.emit(this.form.value);
+      // tslint:disable-next-line:max-line-length
+      const token = localStorage.getItem('tokenAuth');
+      const headers = new HttpHeaders()
+        .set('Content-Type' , 'application/json')
+        .set('Authorization' , 'Bearer ' + token );
+
+      const body = {
+        name: this.form.value.name,
+        type: this.form.value.type,
+        address: this.form.value.address
+      };
+
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/services', body, { headers })
+        .toPromise().then((data: any) => {
+        this.router.navigate(['/services']);
+      });
+
     }
   }
 

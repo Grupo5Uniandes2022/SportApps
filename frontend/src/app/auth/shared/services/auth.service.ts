@@ -10,6 +10,7 @@ export interface User {
   email: string;
   uid: string;
   authenticated: boolean;
+  roleAdm: boolean;
 }
 
 @Injectable()
@@ -26,7 +27,8 @@ export class AuthService {
         const user: User = {
           email: next.email,
           uid: next.uid,
-          authenticated: true
+          authenticated: true,
+          roleAdm: false,
         };
 
         this.store.set('user', user);
