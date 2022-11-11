@@ -36,7 +36,7 @@ export class RegisterComponent {
         fullName: email
       };
 
-      this.http.post<any>(AppSettings + '/api/auth/register', body, { headers })
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/auth/register', body, { headers })
         .toPromise().then((data: any) => {
          localStorage.setItem('tokenAuth', data.token);
          this.router.navigate(['/']);
