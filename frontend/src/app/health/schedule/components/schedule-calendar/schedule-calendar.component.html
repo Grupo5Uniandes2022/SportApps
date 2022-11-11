@@ -11,6 +11,7 @@
     *ngFor="let section of sections"
     [name]="section.name"
     [section]="getSection(section.key)"
+    [events]="events$"
     (select)="selectSection($event, section.key)">
   </app-schedule-section>
 
