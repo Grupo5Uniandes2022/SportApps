@@ -15,22 +15,18 @@ WORKDIR ${RUNTIME_FOLDER}
 ARG USER="uniandes"
 ENV USER=${USER}
 
-# Copy package.json
-COPY package*.json ./
-
-# Install app dependencies
-RUN npm install
-
 # Deployment artifacts
 COPY ${CONTAINER_PATH} $RUNTIME_FOLDER/
+
+# Testing changes
+RUN pwd
+RUN ls -la
+RUN ls ./dist
 
 # User permissions
 RUN addgroup -g 1005 -S ${USER} && \
     adduser -u 1005 -S ${USER} -G ${USER} && \
     chown -R ${USER}:${USER} ${RUNTIME_FOLDER}
-
-# Build dist
-RUN npm run build
 
 USER ${USER}
 
