@@ -76,6 +76,8 @@ jobs:
       - name: Build
         working-directory: ./backend
         run: |-
+          ls ./dist
+          pwd
           docker build \
             --tag "$GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
