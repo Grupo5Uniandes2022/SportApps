@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '@app/auth/shared/services/auth.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {AppSettings} from '../../../config';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent {
         password,
       };
 
-      this.http.post<any>('http://localhost:3000/api/auth/login', body, { headers })
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/auth/login', body, { headers })
         .toPromise().then((data: any) => {
         localStorage.setItem('tokenAuth', data.token);
         this.router.navigate(['/']);

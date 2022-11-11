@@ -6,7 +6,7 @@ import { Store } from '@app/store';
 import { Service } from '@app/models/supplier.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-services',
@@ -31,7 +31,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
         .set('Content-Type' , 'application/json')
         .set('Authorization' , 'Bearer ' + token );
 
-      return this.http.get<any>('http://localhost:3000/api/services/by-supplier', { headers })
+      return this.http.get<any>(AppSettings.API_ENDPOINT + '/api/services/by-supplier', { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -59,7 +59,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
         .set('Content-Type' , 'application/json')
         .set('Authorization' , 'Bearer ' + token );
 
-      return this.http.get<any>('http://localhost:3000/api/services/'+event.id, { headers })
+      return this.http.get<any>(AppSettings.API_ENDPOINT + '/api/services/' + event.id, { headers })
       .pipe(
         catchError(this.handleError)
       );
