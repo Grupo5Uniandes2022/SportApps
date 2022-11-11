@@ -2,10 +2,10 @@ export const environment = {
   production: true,
   stravaBaseUrl: 'https://www.strava.com/api/v3',
   authBaseUrl: 'https://www.strava.com/oauth/authorize',
-  hostBaseUrl: 'http://34.102.145.101',
+  hostBaseUrl: 'http://' + window["location"]["host"] || "default",
   stravaOAuth: {
     clientId: '96159',
-    redirectUri: 'http://34.102.145.101/profile/strava-auth',
+    redirectUri: 'http://'+ window["location"]["host"] +'/profile/strava-auth',
     issuer: 'https://www.strava.com',
     scope: 'activity:read_all,profile:read_all',
     responseType: 'code',
