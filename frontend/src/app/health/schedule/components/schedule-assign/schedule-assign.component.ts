@@ -5,6 +5,7 @@ import { Workout } from '@app/health/shared/services/workouts.service';
 import { DatePipe } from '@angular/common';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AppSettings} from '../../../../config';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-schedule-assign',
@@ -34,7 +35,7 @@ export class ScheduleAssignComponent implements OnInit {
   @Output()
   cancel = new EventEmitter<any>();
 
-  constructor(private datePipe: DatePipe, private http: HttpClient) {}
+  constructor(private datePipe: DatePipe, private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     this.selected = []; // [...this.section.assigned];
@@ -78,7 +79,7 @@ export class ScheduleAssignComponent implements OnInit {
 
       this.http.put<any>(AppSettings.API_ENDPOINT + '/api/events/' + this.selected[0], body, {headers})
         .toPromise().then((data: any) => {
-        // this.router.navigate(['/workouts']);
+          window.location.reload();
       });
     } else {
 
@@ -93,7 +94,7 @@ export class ScheduleAssignComponent implements OnInit {
 
       this.http.post<any>(AppSettings.API_ENDPOINT + '/api/events', body, { headers })
         .toPromise().then((data: any) => {
-        //this.router.navigate(['/workouts']);
+        window.location.reload();
       });
 
 
