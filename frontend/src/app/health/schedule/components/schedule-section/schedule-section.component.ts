@@ -15,6 +15,9 @@ export class ScheduleSectionComponent {
   name: string;
 
   @Input()
+  events: any;
+
+  @Input()
   section: ScheduleItem;
 
   @Output()
@@ -22,10 +25,6 @@ export class ScheduleSectionComponent {
 
   onSelect(type: string, assigned: any[] = []) {
     const data = this.section;
-    console.log("here");
-    console.log(type);
-    console.log(assigned);
-    console.log(data);
 
     this.select.emit({
       type,

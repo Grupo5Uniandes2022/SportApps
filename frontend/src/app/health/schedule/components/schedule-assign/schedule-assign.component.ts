@@ -49,8 +49,8 @@ export class ScheduleAssignComponent implements OnInit {
     return [`../${name}/new`];
   }
 
-  exists(name: string) {
-    return !!~this.selected.indexOf(name);
+  exists(item: any) {
+      return item.startDate !== '2016-09-18T17:34:02.666Z';
   }
 
   updateAssign() {

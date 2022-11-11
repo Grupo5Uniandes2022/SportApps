@@ -25,7 +25,7 @@
           </span>
       <div
         *ngFor="let item of getEventsFromSection(list, section.type)"
-        [class.active]="exists(item.id)"
+        [class.active]="exists(item)"
         (click)="toggleItem(item.id)">
         {{ item.title }}
       </div>
