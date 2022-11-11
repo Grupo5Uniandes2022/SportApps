@@ -4,6 +4,7 @@ import { FormArray, FormGroup, FormBuilder, FormControl, Validators } from '@ang
 import { Workout } from '@app/health/shared/services/workouts.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-workout-form',
@@ -73,11 +74,11 @@ export class WorkoutFormComponent implements OnChanges {
         distance: this.form.value.sets,
         startDate: '2016-09-18T17:34:02.666Z',
         endDate: '2016-09-18T17:34:02.666Z',
-        title: `${this.form.value.name} - ${this.form.value.type}`,
+        title: `Entrenamiento: ${this.form.value.name} - ${this.form.value.type}`,
         type: 'training'
       };
 
-      this.http.post<any>('http://localhost:3000/api/events', body, { headers })
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/events', body, { headers })
         .toPromise().then((data: any) => {
         this.router.navigate(['/workouts']);
       });

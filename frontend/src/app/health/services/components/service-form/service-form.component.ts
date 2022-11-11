@@ -4,7 +4,7 @@ import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { Service } from '@app/health/shared/services/services.service';
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-service-form',
@@ -77,7 +77,7 @@ export class ServiceFormComponent implements OnChanges {
         address: this.form.value.address
       };
 
-      this.http.post<any>('http://localhost:3000/api/services', body, { headers })
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/services', body, { headers })
         .toPromise().then((data: any) => {
         this.router.navigate(['/services']);
       });

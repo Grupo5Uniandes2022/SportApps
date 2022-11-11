@@ -11,6 +11,7 @@
     *ngIf="open"
     [section]="selected$ | async"
     [list]="list$"
+    [services]="services"
     [date]="date$ | async"
     (update)="assignItem($event)"
     (cancel)="closeAssign()">

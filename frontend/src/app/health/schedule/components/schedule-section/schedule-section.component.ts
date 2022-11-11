@@ -18,6 +18,9 @@ export class ScheduleSectionComponent {
   events: any;
 
   @Input()
+  selected: Date;
+
+  @Input()
   section: ScheduleItem;
 
   @Output()

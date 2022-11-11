@@ -5,7 +5,7 @@ import {Store} from '@app/store';
 import {Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Workout, WorkoutsService} from '@app/health/shared/services/workouts.service';
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-workouts',
@@ -44,7 +44,7 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Bearer ' + token);
 
-    this.http.get<any>('http://localhost:3000/api/events', {headers})
+    this.http.get<any>(AppSettings.API_ENDPOINT + '/api/events', {headers})
       .toPromise().then((data: any) => {
         data = data.filter(element => element.type.toString().toLowerCase().includes('training'));
         this.workouts$ = data;

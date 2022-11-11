@@ -4,7 +4,7 @@ import { Meal } from '@app/health/shared/services/meals.service';
 import { Workout } from '@app/health/shared/services/workouts.service';
 import { DatePipe } from '@angular/common';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-schedule-assign',
@@ -21,6 +21,9 @@ export class ScheduleAssignComponent implements OnInit {
 
   @Input()
   list: null;
+
+  @Input()
+  services: null;
 
   @Input()
   date: Date;
@@ -50,10 +53,11 @@ export class ScheduleAssignComponent implements OnInit {
   }
 
   exists(item: any) {
-      return item.startDate !== '2016-09-18T17:34:02.666Z';
+    return !!~this.selected.indexOf(item.id);
+    //return item.startDate !== '2016-09-18T17:34:02.666Z';
   }
 
-  updateAssign() {
+  updateAssign(type: string, services: any, trainings: any) {
     console.log(this.selected);
     // tslint:disable-next-line:max-line-length
     const token = localStorage.getItem('tokenAuth');
@@ -61,15 +65,39 @@ export class ScheduleAssignComponent implements OnInit {
       .set('Content-Type' , 'application/json')
       .set('Authorization' , 'Bearer ' + token );
 
-    const body = {
-      startDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd'),
-      endDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd')
-    };
+    if (type === 'workouts') {
 
-    this.http.put<any>('http://localhost:3000/api/events/' + this.selected[0] , body, { headers })
-      .toPromise().then((data: any) => {
-      // this.router.navigate(['/workouts']);
-    });
+      const item = trainings.filter(element => element.id.toString().toLowerCase().includes(this.selected[0]));
+
+      const body = {
+        startDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+        endDate:  this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+        distance: item[0].distance,
+        duration: item[0].duration
+      };
+
+      this.http.put<any>(AppSettings.API_ENDPOINT + '/api/events/' + this.selected[0], body, {headers})
+        .toPromise().then((data: any) => {
+        // this.router.navigate(['/workouts']);
+      });
+    } else {
+
+
+      const item = services.filter(element => element.id.toString().toLowerCase().includes(this.selected[0]));
+      const body = {
+        startDate: this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+        endDate: this.datePipe.transform(this.date, 'yyyy-MM-dd'),
+        title: 'Cita - ' + item[0].name,
+        type: 'appointment'
+      };
+
+      this.http.post<any>(AppSettings.API_ENDPOINT + '/api/events', body, { headers })
+        .toPromise().then((data: any) => {
+        //this.router.navigate(['/workouts']);
+      });
+
+
+    }
   }
 
   cancelAssign() {

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core
 
 import { ScheduleItem, ScheduleList } from '@app/health/shared/services/schedule.service';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -101,9 +101,9 @@ export class ScheduleCalendarComponent implements OnChanges {
       .set('Content-Type', 'application/json')
       .set('Authorization', 'Bearer ' + token);
 
-    this.http.get<any>('http://localhost:3000/api/events', {headers})
+    this.http.get<any>(AppSettings.API_ENDPOINT + '/api/events', {headers})
       .toPromise().then((data: any) => {
-      data = data.filter(element => element.type.toString().toLowerCase().includes(typeEvent));
+      //data = data.filter(element => element.type.toString().toLowerCase().includes(typeEvent));
       console.log(data);
       this.events$ = data;
     });
