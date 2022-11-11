@@ -27,8 +27,14 @@ export class ServicesController {
     return this.servicesService.findAll();
   }
 
-  @Delete(':id')
+  @Get(':id')
+  @Auth()
+  find(@GetUser() user: User, @Param('id') id: string) {
+    return this.servicesService.find(user, id);
+  }
+
+  @Delete('/:id')
   remove(@Param('id') id: string) {
-    return this.servicesService.remove(+id);
+    return this.servicesService.remove(id);
   }
 }

@@ -14,6 +14,7 @@ import { ServicesService } from '@app/health/shared/services/services.service';
 import { WorkoutsService } from '@app/health/shared/services/workouts.service';
 import { ScheduleService } from '@app/health/shared/services/schedule.service';
 import { StravaService } from '@app/health/shared/services/strava.service';
+import { ListItemServicesComponent } from './components/list-item-services/list-item-services.component';
 
 
 @NgModule({
@@ -24,11 +25,13 @@ import { StravaService } from '@app/health/shared/services/strava.service';
   ],
   declarations: [
     ListItemComponent,
+    ListItemServicesComponent,
     JoinPipe,
     WorkoutPipe
   ],
   exports: [
     ListItemComponent,
+    ListItemServicesComponent,
     JoinPipe,
     WorkoutPipe
   ]

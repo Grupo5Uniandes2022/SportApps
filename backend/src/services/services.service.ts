@@ -35,7 +35,13 @@ export class ServicesService {
     ).filter((service) => service.user.id === user.id);
   }
 
-  async remove(id: number) {
+  async find(user: User, id: string) {
+    return await (
+      await this.serviceRepository.find({ relations: ['user'] })
+    ).filter((service) => service.id === id);
+  }
+
+  async remove(id: string) {
     await this.serviceRepository.delete(id);
 
     return { ok: true };
