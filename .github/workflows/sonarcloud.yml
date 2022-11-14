@@ -41,7 +41,9 @@ permissions:
 jobs:
   Analysis:
     runs-on: ubuntu-latest
-    
+    defaults:
+      run:
+        working-directory: ./frontend
     steps:
       - name: Analyze with SonarCloud         
 
