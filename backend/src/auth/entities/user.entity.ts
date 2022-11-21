@@ -14,6 +14,11 @@ export class User {
     unique: true
   })
   email: string;
+
+  @Column('text', {
+  default: 'GRATIS'
+  })
+  plan: string;
   
   @Column('text',{
     select: false

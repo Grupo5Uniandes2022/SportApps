@@ -6,6 +6,10 @@ export class CreateUserDto {
   @IsString()
   @IsEmail()
   email: string;
+
+  @IsString()
+  @IsOptional()
+  plan: string = 'GRATIS';
   
   @IsString()
   @MinLength(6)

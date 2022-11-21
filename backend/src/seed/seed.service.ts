@@ -38,21 +38,25 @@ export class SeedService {
       fullName: 'doc',
       email: 'doc@doc.com',
       password: 'Doc123',
+      plan: 'GRATIS',
     },
     {
       fullName: 'doc1',
       email: 'doc1@doc.com',
       password: 'Doc123',
+      plan: 'GRATIS',
     },
     {
       fullName: 'doc2',
       email: 'doc2@doc.com',
       password: 'Doc123',
+      plan: 'GRATIS',
     },
     {
       fullName: 'doc3',
       email: 'doc3@doc.com',
       password: 'Doc123',
+      plan: 'GRATIS',
     },
     ];  
       const insertUsersPromises=  [];

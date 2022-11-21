@@ -36,6 +36,7 @@ export class LoginComponent {
       this.http.post<any>(AppSettings.API_ENDPOINT + '/api/auth/login', body, { headers })
         .toPromise().then((data: any) => {
         localStorage.setItem('tokenAuth', data.token);
+        localStorage.setItem('plan', data.plan);
         this.router.navigate(['/']);
       });
 

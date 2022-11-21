@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Req, UseGuards, SetMetadata } from '@nestj
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { GetUser,RawHeaders, Auth, RoleProtected } from './decorators';
-import { LoginUserDto, CreateUserDto } from './dto';
+import { LoginUserDto, CreateUserDto, UpdateUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { UserRoleGuard } from './guards/user-role.guard';
 import { ValidRoles } from './interfaces';
@@ -14,6 +14,12 @@ export class AuthController {
   @Post('register')
   create(@Body() createUserDto: CreateUserDto) {
     return this.authService.create(createUserDto);
+  }
+
+  @Post('plan')
+  @Auth()
+  update(@Body() updateUserDto: UpdateUserDto, @GetUser()user: User) {
+    return this.authService.update(updateUserDto, user);
   }
   
   @Post('login')
