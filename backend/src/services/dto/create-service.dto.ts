@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { IsIn, IsString, MinLength } from "class-validator";
 
 export class CreateServiceDto {

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createParamDecorator, ExecutionContext, InternalServerErrorException } from '@nestjs/common';
 
 export const RawHeaders = createParamDecorator(

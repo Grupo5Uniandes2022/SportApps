@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { IsArray, IsIn, IsOptional, IsString } from "class-validator";
 
 export class CreateUserLimitationDto {

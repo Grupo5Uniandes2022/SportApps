@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { IsDate, IsDateString, IsIn, IsString, IsInt, IsOptional } from "class-validator";
 
 export class CreateEventDto {
