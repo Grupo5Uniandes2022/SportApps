@@ -104,13 +104,9 @@ class _LoginForm extends StatelessWidget {
                             FocusScope.of(context).unfocus();
                             if (!loginForm.isValidForm()) return;
                             loginForm.isLoading = true;
-                            /* await Future.delayed(Duration(seconds: 2)); */
-                            await authProvider.loginUser(
-                                loginForm.correo, loginForm.password);
+                            await Future.delayed(Duration(seconds: 2));
                             loginForm.isLoading = false;
-                            if (authProvider.user!.token != null) {
-                              Navigator.pushReplacementNamed(context, 'home');
-                            }
+                            Navigator.pushReplacementNamed(context, 'home');
                           },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
