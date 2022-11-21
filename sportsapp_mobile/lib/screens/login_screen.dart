@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sportsapp_mobile/providers/auth_provider.dart';
 import 'package:sportsapp_mobile/providers/login_form_provider.dart';
 import 'package:sportsapp_mobile/ui/input_decorations.dart';
 import 'package:sportsapp_mobile/widgets/widgets.dart';
@@ -51,6 +52,7 @@ class _LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
+    final authProvider = Provider.of<AuthProvider>(context);
     return Container(
         child: Form(
             key: loginForm.formKey,
@@ -102,9 +104,13 @@ class _LoginForm extends StatelessWidget {
                             FocusScope.of(context).unfocus();
                             if (!loginForm.isValidForm()) return;
                             loginForm.isLoading = true;
-                            await Future.delayed(Duration(seconds: 2));
+                            /* await Future.delayed(Duration(seconds: 2)); */
+                            await authProvider.loginUser(
+                                loginForm.correo, loginForm.password);
                             loginForm.isLoading = false;
-                            Navigator.pushReplacementNamed(context, 'home');
+                            if (authProvider.user!.token != null) {
+                              Navigator.pushReplacementNamed(context, 'home');
+                            }
                           },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10)),
