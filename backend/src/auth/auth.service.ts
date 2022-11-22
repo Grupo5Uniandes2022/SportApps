@@ -4,7 +4,7 @@ import {JwtService} from '@nestjs/jwt';
 import {Repository} from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto, UpdateUserDto, LoginUserDto } from './dto';
+import { CreateUserDto, UpdateUserDto, LoginUserDto, SportUserDto } from './dto';
 import { User } from './entities/user.entity';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 
@@ -42,6 +42,17 @@ export class AuthService {
   async update(updateUserDto: UpdateUserDto, userLogin: User) {
     try {
       const user = this.userRepository.update(userLogin.id, updateUserDto);
+      return {
+        ...user,
+      };
+    } catch (error) {
+      this.handleDbErrors(error)
+    }
+  }
+
+  async updateSportInfo(sportUserDto: SportUserDto, userLogin: User) {
+    try {
+      const user = this.userRepository.update(userLogin.id, sportUserDto);
       return {
         ...user,
       };
