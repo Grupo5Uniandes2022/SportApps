@@ -5,6 +5,7 @@ import 'package:sportsapp_mobile/providers/auth_provider.dart';
 import 'package:sportsapp_mobile/screens/profile_screen.dart';
 import 'package:sportsapp_mobile/screens/screens.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:sportsapp_mobile/services/event_service.dart';
 
 void main() => runApp(AppState());
 
@@ -15,7 +16,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false)
+        ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false),
+        ChangeNotifierProvider(create: (_) => EventService())
       ],
       child: MyApp(),
     );
