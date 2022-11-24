@@ -12,12 +12,6 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
-  List<String> items = ['Kinesiologo', 'Entrenador', 'General'];
-
-  String? selectedItem = 'Kinesiologo';
-  bool? _value = false;
-  int? selectedIndex = -1;
-
   @override
   Widget build(BuildContext context) {
     final eventService = Provider.of<EventService>(context);
@@ -28,23 +22,22 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
       body: Column(children: [
         SizedBox(height: 40),
         Center(
-            child: SizedBox(
-          height: 140,
-          child: DropdownButtonFormField<String>(
-            decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide:
-                        BorderSide(width: 3, color: Colors.blueAccent))),
-            value: selectedItem,
-            items: items
-                .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(item, style: TextStyle(fontSize: 24))))
-                .toList(),
-            onChanged: (item) => setState(() => {selectedItem = item}),
-          ),
-        )),
+          child: SizedBox(
+              height: 140,
+              child: DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide:
+                              BorderSide(width: 3, color: Colors.blueAccent))),
+                  value: 'Kinesiologo',
+                  items: eventService.services
+                      ?.map((item) => DropdownMenuItem<String>(
+                          value: item,
+                          child: Text(item, style: TextStyle(fontSize: 24))))
+                      .toList(),
+                  onChanged: (item) => eventService.selectService(item!))),
+        ),
         ListView.builder(
           itemCount: eventService.appointments!.length,
           scrollDirection: Axis.vertical,
@@ -57,29 +50,17 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                     .toString()),
                 subtitle:
                     Text(eventService.appointments![index].subTitle.toString()),
-                value: !eventService.appointments![index].isFree
-                    ? !eventService.appointments![index].isFree
-                    : eventService.appointments![index].isSelected,
+                value: !eventService.appointments![index].isFree,
                 onChanged: !eventService.appointments![index].isFree
                     ? null
                     : ((value) {
-                        print(value);
+                        eventService.checkAppointment(index);
                       }));
           },
         ),
         SizedBox(
           height: 40,
         ),
-        MaterialButton(
-            onPressed: () {},
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 0,
-            color: Colors.blueAccent,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              child: Text('Solicitar', style: TextStyle(color: Colors.white)),
-            ))
       ]),
     );
   }
