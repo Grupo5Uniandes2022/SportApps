@@ -6,6 +6,7 @@ import 'package:sportsapp_mobile/screens/profile_screen.dart';
 import 'package:sportsapp_mobile/screens/screens.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sportsapp_mobile/services/event_service.dart';
+import 'package:sportsapp_mobile/services/timer_service.dart';
 
 void main() => runApp(AppState());
 
@@ -17,7 +18,8 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider(), lazy: false),
-        ChangeNotifierProvider(create: (_) => EventService())
+        ChangeNotifierProvider(create: (_) => EventService()),
+        ChangeNotifierProvider(create: (_) => TimerService()),
       ],
       child: MyApp(),
     );
@@ -45,7 +47,8 @@ class MyApp extends StatelessWidget {
           'calendar': (_) => CalendarScreen(),
           'appointment': (_) => AppointmentScreen(),
           'profile': (_) => ProfileScreen(),
-          'integration': (_) => IntegrationScreen()
+          'integration': (_) => IntegrationScreen(),
+          'training': (_) => TrainingScreen()
         },
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[300]));

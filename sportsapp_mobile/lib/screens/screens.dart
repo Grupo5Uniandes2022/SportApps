@@ -1,3 +1,4 @@
+export 'package:sportsapp_mobile/screens/training_screen.dart';
 export 'package:sportsapp_mobile/screens/integration_screen.dart';
 export 'package:sportsapp_mobile/screens/appointment_screen.dart';
 export 'package:sportsapp_mobile/screens/calendar_screen.dart';
