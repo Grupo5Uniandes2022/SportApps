@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { WebComponent } from './web.component';
+import { ActivityStravaComponent } from './activity-strava.component';
 
-describe('WebComponent', () => {
-  let component: WebComponent;
-  let fixture: ComponentFixture<WebComponent>;
+describe('ActivityStravaComponent', () => {
+  let component: ActivityStravaComponent;
+  let fixture: ComponentFixture<ActivityStravaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WebComponent ]
+      declarations: [ ActivityStravaComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WebComponent);
+    fixture = TestBed.createComponent(ActivityStravaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
