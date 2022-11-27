@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +29,11 @@ class AppState extends StatelessWidget {
 }
 
 class MyApp extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+  late final FirebaseMessaging _messaging;
   @override
   Widget build(BuildContext context) {
+    registerNotification();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sports App',
@@ -39,6 +44,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate
         ],
         supportedLocales: [Locale('en', ''), Locale('es', '')],
+        navigatorKey: navigatorKey,
         initialRoute: 'login',
         routes: {
           'login': (_) => LoginScreen(),
@@ -53,4 +59,63 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[300]));
   }
+
+  void registerNotification() async {
+    // 1. Initialize the Firebase app
+    await Firebase.initializeApp();
+
+    // 2. Instantiate Firebase Messaging
+    _messaging = FirebaseMessaging.instance;
+
+    // 3. On iOS, this helps to take the user permissions
+    NotificationSettings settings = await _messaging.requestPermission(
+      alert: true,
+      badge: true,
+      provisional: false,
+      sound: true,
+    );
+
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      print('User granted permission');
+      _messaging.getToken().then((token) {
+        print('====== FCM  Token =====');
+        print(token);
+
+      });
+      // For handling the received notifications
+      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+        // Parse the message received
+        PushNotification notification = PushNotification(
+          title: message.notification?.title,
+          body: message.notification?.body,
+        );
+        print('===========Message =================');
+        print(message.notification?.title);
+        print(message.notification?.body);
+        print(message.sentTime);
+        print(DateTime.now());
+        navigatorKey.currentState?.pushNamed('message', arguments: message);
+      });
+      //FirebaseMessaging.onBackgroundMessage( _backgroundHandler );
+      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+    } else {
+      print('User declined or has not accepted permission');
+    }
+  }
+}
+
+Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  print("Handling a background message: ${message.messageId}");
+  print("${message.sentTime}");
+  print(DateTime.now());
+}
+
+class PushNotification {
+  PushNotification({
+    this.title,
+    this.body,
+  });
+  String? title;
+  String? body;
 }
