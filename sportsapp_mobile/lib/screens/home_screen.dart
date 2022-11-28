@@ -18,6 +18,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <ItemBoton>[
+      new ItemBoton(FontAwesomeIcons.play, 'Entrenar', Color(0xff317183),
+          Color(0xff46997D), 'training'),
       new ItemBoton(FontAwesomeIcons.calendar, 'Calendario', Color(0xff6989F5),
           Color(0xff906EF5), 'calendar'),
       new ItemBoton(FontAwesomeIcons.userDoctor, 'Solicitar Cita',
