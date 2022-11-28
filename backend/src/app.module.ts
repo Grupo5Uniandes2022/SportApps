@@ -7,6 +7,8 @@ import { UserLimitationsModule } from './user-limitations/user-limitations.modul
 import { EventsModule } from './events/events.module';
 import { SeedModule } from './seed/seed.module';
 import { PushNotModule } from './push-not/push-not.module';
+import { ServicesModule } from './services/services.module';
+import { LivenessModule } from './liveness/liveness.module';
 
 @Module({
   imports: [
@@ -19,14 +21,16 @@ import { PushNotModule } from './push-not/push-not.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
-      synchronize: true //No Usar en prod, en prod hay migraciones
+      synchronize: true, //No Usar en prod, en prod hay migraciones
     }),
     AuthModule,
     PayModule,
     UserLimitationsModule,
     EventsModule,
     SeedModule,
-    PushNotModule
+    PushNotModule,
+    ServicesModule,
+    LivenessModule,
   ],
   controllers: [],
   providers: [],

@@ -11,8 +11,8 @@
       Nuevo Entrenamiento
     </a>
   </div>
-  <div *ngIf="workouts$ | async as workouts; else loading;">
-    <div class="message" *ngIf="!workouts.length">
+  <div *ngIf="workouts$ as workouts; else loading;">
+    <div class="message" *ngIf="!workouts">
       <img src="assets/images/face.svg">
       No existen entrenamientos, crea uno para empezar.
     </div>

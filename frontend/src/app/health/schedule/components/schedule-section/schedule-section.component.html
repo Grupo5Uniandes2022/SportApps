@@ -5,9 +5,9 @@
   <div>
     <div
       class="schedule-section__item food"
-      *ngIf="section.meals; else addMeal"
-      (click)="onSelect('services', section.meals)">
-      <span>{{ section.meals | join }}</span>
+      *ngIf="events !== null; else addMeal"
+      (click)="onSelect('services', section.workouts)">
+      <span>{{ events  | join : 'appointment' : selected }}</span>
     </div>
     <ng-template #addMeal>
       <div
@@ -18,9 +18,9 @@
     </ng-template>
     <div
       class="schedule-section__item workout"
-      *ngIf="section.workouts; else addWorkout"
+      *ngIf="events !== null; else addWorkout"
       (click)="onSelect('workouts', section.workouts)">
-      <span>{{ section.workouts | join }}</span>
+      <span>{{ events  | join : 'training' : selected }}</span>
     </div>
     <ng-template #addWorkout>
       <div

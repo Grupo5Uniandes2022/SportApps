@@ -10,7 +10,9 @@
   <app-schedule-section
     *ngFor="let section of sections"
     [name]="section.name"
+    [selected]="selectedDay"
     [section]="getSection(section.key)"
+    [events]="events$"
     (select)="selectSection($event, section.key)">
   </app-schedule-section>
 

@@ -1,5 +1,6 @@
-export enum ValidRoles{
+/* istanbul ignore file */
+export enum ValidRoles {
   admin = 'admin',
   superUser = 'super-user',
-  user = 'user'
+  user = 'user',
 }

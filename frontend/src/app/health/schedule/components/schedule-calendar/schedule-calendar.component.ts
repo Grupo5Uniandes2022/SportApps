@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 
 import { ScheduleItem, ScheduleList } from '@app/health/shared/services/schedule.service';
-
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {AppSettings} from '../../../../config';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -25,16 +26,22 @@ export class ScheduleCalendarComponent implements OnChanges {
   select = new EventEmitter<any>();
 
   sections = [
-    { key: 'morning', name: 'Mañana' },
-    { key: 'lunch', name: 'Tarde' },
-    { key: 'evening', name: 'Noche' },
+    { key: 'morning', name: 'Eventos' },
   ];
 
   selectedDayIndex: number;
   selectedDay: Date;
   selectedWeek: Date;
 
-  constructor() {}
+
+  events$ = null;
+
+  constructor( private http: HttpClient  ) { }
+
+  ngOnInit() {
+    const typeEvent = 'training';
+    this.getWorkouts(typeEvent);
+  }
 
   ngOnChanges() {
     this.selectedDayIndex = this.getToday(this.selectedDay);
@@ -85,6 +92,21 @@ export class ScheduleCalendarComponent implements OnChanges {
     const day = date.getDay();
     const diff = date.getDate() - day + (day === 0 ? -6 : 1);
     return new Date(date.setDate(diff));
+  }
+
+
+  private getWorkouts(typeEvent: string) {
+    const token = localStorage.getItem('tokenAuth');
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', 'Bearer ' + token);
+
+    this.http.get<any>(AppSettings.API_ENDPOINT + '/api/events', {headers})
+      .toPromise().then((data: any) => {
+      //data = data.filter(element => element.type.toString().toLowerCase().includes(typeEvent));
+      console.log(data);
+      this.events$ = data;
+    });
   }
 
 }

@@ -8,16 +8,17 @@ describe('PayController', () => {
 
   const mockService = {
     findAll: jest.fn(),
-    create: jest.fn()
-  }
+    create: jest.fn(),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PayController],
       providers: [PayService],
     })
-    .overrideProvider(PayService).useValue(mockService)
-    .compile();
+      .overrideProvider(PayService)
+      .useValue(mockService)
+      .compile();
 
     controller = module.get<PayController>(PayController);
     payService = module.get<PayService>(PayService);
@@ -25,6 +26,10 @@ describe('PayController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('should be defined', () => {
+    expect(payService).toBeDefined();
   });
 
   it('should find all', () => {
@@ -35,7 +40,7 @@ describe('PayController', () => {
 
   it('create payment', () => {
     const createSpy = jest.spyOn(payService, 'create');
-    controller.create({title: 'test plan', features: ['/test']});
+    controller.create({ title: 'test plan', features: ['/test'] });
     expect(createSpy).toHaveBeenCalled();
   });
 });
