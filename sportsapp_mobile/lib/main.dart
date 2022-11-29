@@ -76,11 +76,8 @@ class MyApp extends StatelessWidget {
     );
 
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      print('User granted permission');
       _messaging.getToken().then((token) {
         print('====== FCM  Token =====');
-        print(token);
-
       });
       // For handling the received notifications
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
@@ -89,26 +86,13 @@ class MyApp extends StatelessWidget {
           title: message.notification?.title,
           body: message.notification?.body,
         );
-        print('===========Message =================');
-        print(message.notification?.title);
         print(message.notification?.body);
-        print(message.sentTime);
-        print(DateTime.now());
         navigatorKey.currentState?.pushNamed('message', arguments: message);
       });
-      //FirebaseMessaging.onBackgroundMessage( _backgroundHandler );
-      FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
     } else {
       print('User declined or has not accepted permission');
     }
   }
-}
-
-Future _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  print("Handling a background message: ${message.messageId}");
-  print("${message.sentTime}");
-  print(DateTime.now());
 }
 
 class PushNotification {
