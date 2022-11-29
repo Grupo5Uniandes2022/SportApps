@@ -6,7 +6,6 @@ import { PayModule } from './pay/pay.module';
 import { UserLimitationsModule } from './user-limitations/user-limitations.module';
 import { EventsModule } from './events/events.module';
 import { SeedModule } from './seed/seed.module';
-import { PushNotModule } from './push-not/push-not.module';
 import { ServicesModule } from './services/services.module';
 import { LivenessModule } from './liveness/liveness.module';
 
@@ -28,7 +27,6 @@ import { LivenessModule } from './liveness/liveness.module';
     UserLimitationsModule,
     EventsModule,
     SeedModule,
-    PushNotModule,
     ServicesModule,
     LivenessModule,
   ],
